@@ -1,10 +1,17 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App'
-import './assets/App.css'
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { Auth0Provider } from "@auth0/auth0-react";
+import App from "./App";
+import "./assets/App.css";
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-)
+    <Auth0Provider
+      domain="askit.us.auth0.com"
+      clientId="bcbgyJq1mMkD7MyK0uhWIXNlrHITZ7wj"
+      authorizationParams={{ redirect_uri: window.location.origin }}
+    >
+      <App />
+    </Auth0Provider>
+  </React.StrictMode>
+);
