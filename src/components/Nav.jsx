@@ -18,7 +18,8 @@ function classNames(...classes) {
 }
 
 export default function Nav() {
-  const { logout, loginWithRedirect,user, isAuthenticated, isLoading } = useAuth0();
+  const { logout, loginWithRedirect, user, isAuthenticated, isLoading } =
+    useAuth0();
   console.log(user);
 
   if (isLoading) {
@@ -71,7 +72,7 @@ export default function Nav() {
                             onClick={() => {
                               loginWithRedirect();
                             }}
-                            className="flex gap-2 items-center text-right w-auto text-white cursor-pointer text-sm font-medium"
+                            className="flex gap-2 items-center text-right rounded-md px-3 py-2 text-sm font-medium cursor-pointer text-gray-300 hover:bg-gray-700 hover:text-white"
                           >
                             Iniciar Sesión
                             <svg
@@ -186,60 +187,72 @@ export default function Nav() {
                       {item.name}
                     </Disclosure.Button>
                   ))}
-                  <h1
-                    onClick={() => {
-                      loginWithRedirect();
-                    }}
-                    className="flex gap-2 items-center text-right w-auto text-white cursor-pointer text-sm font-medium"
-                  >
-                    Iniciar Sesión
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth={1.5}
-                      stroke="currentColor"
-                      className="w-6 h-6"
+                  {!isAuthenticated && (
+                    <h1
+                      onClick={() => {
+                        loginWithRedirect();
+                      }}
+                      className="flex gap-2 items-center text-right rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white cursor-pointer"
                     >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75"
-                      />
-                    </svg>
-                  </h1>
-                </div>
-                <div className="border-t border-gray-700 pt-4 pb-3">
-                  <div className="flex items-center px-5">
-                    <div className="flex-shrink-0">
-                      <img
-                        className="h-10 w-10 rounded-full"
-                        src={user.imageUrl}
-                        alt=""
-                      />
-                    </div>
-                    <div className="ml-3">
-                      <div className="text-base font-medium leading-none text-white">
-                        {user.name}
-                      </div>
-                      <div className="text-sm font-medium leading-none text-gray-400">
-                        {user.email}
-                      </div>
-                    </div>
-                  </div>
-                  <div className="mt-3 space-y-1 px-2">
-                    {userNavigation.map((item) => (
-                      <Disclosure.Button
-                        key={item.name}
-                        as="a"
-                        href={item.href}
-                        className="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white"
+                      Iniciar Sesión
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        strokeWidth={1.5}
+                        stroke="currentColor"
+                        className="w-6 h-6"
                       >
-                        {item.name}
-                      </Disclosure.Button>
-                    ))}
-                  </div>
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75"
+                        />
+                      </svg>
+                    </h1>
+                  )}
                 </div>
+                {isAuthenticated && (
+                  <div className="border-t border-gray-700 pt-4 pb-3">
+                    <div className="flex items-center px-5">
+                      <div className="flex-shrink-0">
+                        <img
+                          className="h-10 w-10 rounded-full"
+                          src={user.picture}
+                          alt=""
+                        />
+                      </div>
+                      <div className="ml-3">
+                        <div className="text-base font-medium leading-none text-white">
+                          {user.nickname}
+                        </div>
+                        <div className="text-sm font-medium leading-none text-gray-400">
+                          {user.name}
+                        </div>
+                      </div>
+                    </div>
+                    <div className="mt-3 space-y-1 px-2">
+                      {userNavigation.map((item) => (
+                        <Disclosure.Button
+                          key={item.name}
+                          as="a"
+                          href={item.href}
+                          className="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white"
+                        >
+                          {item.name}
+                        </Disclosure.Button>
+                      ))}
+                      <p
+                        onClick={() => {
+                          logout();
+                        }}
+                        className={
+                          "block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white cursor-pointer"
+                        }
+                      >Cerrar Sesión</p>
+                    </div>
+                  </div>
+                )}
               </Disclosure.Panel>
             </>
           )}
