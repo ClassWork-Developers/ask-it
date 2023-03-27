@@ -4,7 +4,11 @@ module.exports = {
   theme: {
     extend: {
       colors: {},
-      fontFamily: {},
+      fontFamily: {
+        exo: ['Exo 2'],
+        hindi: ['Hind Siliguri']
+        
+      },
     },
   },
   darkMode: 'class',

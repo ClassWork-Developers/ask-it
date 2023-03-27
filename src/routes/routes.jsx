@@ -7,8 +7,6 @@ import Formularios from "../components/Formularios";
 import Buscar from "../components/Buscar";
 import Respondidos from "../components/Respondidos";
 import UndefinedPath from "../components/UndefinedPath";
-// import Log from "../views/Log";
-
 export default function Router() {
 	return (
 		<BrowserRouter>
@@ -24,7 +22,6 @@ export default function Router() {
 					<Route path="Buscar" element={<Buscar />} />
 					<Route path="Respondidos" element={<Respondidos />} />
 				</Route>
-				{/* <Route path="/Log" element={<Log />} /> */}
 				<Route path="*" element={<UndefinedPath />} />
 			</Routes>
 		</BrowserRouter>
