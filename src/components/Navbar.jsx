@@ -1,4 +1,5 @@
 import { Fragment } from "react";
+import { Outlet } from "react-router-dom";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { useAuth0 } from "@auth0/auth0-react";
@@ -17,7 +18,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function Nav() {
+export default function Navbar() {
   const { logout, loginWithRedirect, user, isAuthenticated, isLoading } =
     useAuth0();
   console.log(user);
@@ -28,14 +29,6 @@ export default function Nav() {
 
   return (
     <>
-      {/*
-        This example requires updating your template:
-
-        ```
-        <html class="h-full bg-gray-100">
-        <body class="h-full">
-        ```
-      */}
       <div className="min-h-full">
         <Disclosure as="nav" className="bg-gray-800">
           {({ open }) => (
@@ -257,17 +250,9 @@ export default function Nav() {
             </>
           )}
         </Disclosure>
-
-        <header className="bg-white shadow">
-          <div className="mx-auto max-w-7xl py-6 px-4 sm:px-6 lg:px-8">
-            <h1 className="text-3xl font-bold tracking-tight text-gray-900">
-              Dashboard
-            </h1>
-          </div>
-        </header>
         <main>
           <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
-            {/* Your content */}
+            <Outlet />
           </div>
         </main>
       </div>

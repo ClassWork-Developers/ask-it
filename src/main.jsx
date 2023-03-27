@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { Auth0Provider } from "@auth0/auth0-react";
-import App from "./App";
+import Router from "./routes/routes";
 import "./assets/App.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
@@ -11,7 +11,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       clientId="bcbgyJq1mMkD7MyK0uhWIXNlrHITZ7wj"
       authorizationParams={{ redirect_uri: window.location.origin }}
     >
-      <App />
+      <Router />
     </Auth0Provider>
   </React.StrictMode>
 );
