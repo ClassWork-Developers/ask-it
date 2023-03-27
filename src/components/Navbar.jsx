@@ -1,5 +1,5 @@
-import { Fragment } from "react";
 import { Outlet } from "react-router-dom";
+import { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { useAuth0 } from "@auth0/auth0-react";
@@ -18,10 +18,9 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function Navbar() {
+export default function Nav() {
   const { logout, loginWithRedirect, user, isAuthenticated, isLoading } =
     useAuth0();
-  console.log(user);
 
   if (isLoading) {
     return <div>cargando...</div>;
@@ -29,8 +28,17 @@ export default function Navbar() {
 
   return (
     <>
+      {/*
+        This example requires updating your template:
+
+        
+
+        <html class="h-full bg-gray-100">
+        <body class="h-full">
+        
+      */}
       <div className="min-h-full">
-        <Disclosure as="nav" className="bg-gray-800">
+        <Disclosure as="nav" className="bg-gray-200">
           {({ open }) => (
             <>
               <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -52,7 +60,7 @@ export default function Navbar() {
                             className={classNames(
                               item.current
                                 ? "bg-gray-900 text-white"
-                                : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                                : "text-gray-800 hover:bg-gray-700 hover:text-white",
                               "rounded-md px-3 py-2 text-sm font-medium"
                             )}
                             aria-current={item.current ? "page" : undefined}
@@ -65,7 +73,7 @@ export default function Navbar() {
                             onClick={() => {
                               loginWithRedirect();
                             }}
-                            className="flex gap-2 items-center text-right rounded-md px-3 py-2 text-sm font-medium cursor-pointer text-gray-300 hover:bg-gray-700 hover:text-white"
+                            className="flex gap-2 items-center text-right rounded-md px-3 py-2 text-sm font-medium cursor-pointer text-gray-800 hover:bg-gray-700 hover:text-white"
                           >
                             Iniciar Sesión
                             <svg
@@ -92,7 +100,7 @@ export default function Navbar() {
                     {isAuthenticated && (
                       <Menu as="div" className="relative ml-3">
                         <div>
-                          <Menu.Button className="flex max-w-xs items-center rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                          <Menu.Button className="flex max-w-xs items-center rounded-full bg-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                             <span className="sr-only">Open user menu</span>
                             <img
                               className="h-8 w-8 rounded-full"
@@ -144,7 +152,7 @@ export default function Navbar() {
                   </div>
                   <div className="-mr-2 flex md:hidden">
                     {/* Mobile menu button */}
-                    <Disclosure.Button className="inline-flex items-center justify-center rounded-md bg-gray-800 p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                    <Disclosure.Button className="inline-flex items-center justify-center rounded-md bg-gray-200 p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                       <span className="sr-only">Open main menu</span>
                       {open ? (
                         <XMarkIcon
@@ -161,7 +169,6 @@ export default function Navbar() {
                   </div>
                 </div>
               </div>
-
               <Disclosure.Panel className="md:hidden">
                 <div className="space-y-1 px-2 pt-2 pb-3 sm:px-3">
                   {navigation.map((item) => (
@@ -172,7 +179,7 @@ export default function Navbar() {
                       className={classNames(
                         item.current
                           ? "bg-gray-900 text-white"
-                          : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                          : "text-gray-800 hover:bg-gray-700 hover:text-white",
                         "block rounded-md px-3 py-2 text-base font-medium"
                       )}
                       aria-current={item.current ? "page" : undefined}
@@ -185,7 +192,7 @@ export default function Navbar() {
                       onClick={() => {
                         loginWithRedirect();
                       }}
-                      className="flex gap-2 items-center text-right rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white cursor-pointer"
+                      className="flex gap-2 items-center text-right rounded-md px-3 py-2 text-base font-medium text-gray-800 hover:bg-gray-700 hover:text-white cursor-pointer"
                     >
                       Iniciar Sesión
                       <svg
@@ -242,7 +249,9 @@ export default function Navbar() {
                         className={
                           "block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white cursor-pointer"
                         }
-                      >Cerrar Sesión</p>
+                      >
+                        Cerrar Sesión
+                      </p>
                     </div>
                   </div>
                 )}
@@ -250,12 +259,12 @@ export default function Navbar() {
             </>
           )}
         </Disclosure>
-        <main>
-          <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
-            <Outlet />
-          </div>
-        </main>
       </div>
+      <main>
+        <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
+          <Outlet />
+        </div>
+      </main> 
     </>
   );
 }

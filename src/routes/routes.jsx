@@ -2,7 +2,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import NavbarSesion from "../components/NavbarSesion";
 import Inicio from "../views/Inicio";
-import NavbarSesion from "../components/NavbarSesion";
 import Creacion from "../components/Creacion";
 import Formularios from "../components/Formularios";
 import Buscar from "../components/Buscar";
@@ -18,7 +17,7 @@ export default function Router() {
 					{/* Landing Page */}
 					<Route index element={<Inicio />} />
 				</Route>
-				<Route path="/sesión" element={<NavbarSesion />}>
+				<Route path="/sesion" element={<NavbarSesion />}>
 					{/* Sesión iniciada */}
 					<Route path="Crear" element={<Creacion />} />
 					<Route path="Formularios" element={<Formularios />} />
