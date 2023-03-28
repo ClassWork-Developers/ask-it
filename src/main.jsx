@@ -9,7 +9,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <Auth0Provider
       domain="askit.us.auth0.com"
       clientId="bcbgyJq1mMkD7MyK0uhWIXNlrHITZ7wj"
-      authorizationParams={{ redirect_uri: window.location.origin }}
+      authorizationParams={{ redirect_uri:'http://localhost:5173/sesion' }}
     >
       <Router />
     </Auth0Provider>
