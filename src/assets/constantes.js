@@ -35,11 +35,22 @@ const testimoniosData = [
 		image: 'https://picsum.photos/800/400?random=3',
 	},
 ];
-
 const navigation = [
-	{ name: 'Inicio', href: '#', current: true },
-	{ name: 'Sobre Nosotros', href: '#', current: false },
-	{ name: '¿Cómo usar?', href: '#', current: false },
+	{
+		name: 'Inicio',
+		href: 'inicio',
+		viewPort: 'inicioViewPort'
+	},
+	{
+		name: 'Sobre Nosotros',
+		href: 'nosotros',
+		viewPort: 'nosotrosViewPort'
+	},
+	{
+		name: '¿Cómo usar?',
+		href: 'uso',
+		viewPort: 'usoViewPort'
+	},
 ];
 const userNavigation = [
 	{ name: 'Tu perfil', href: '#' },
@@ -82,4 +93,11 @@ const steps = [
 			'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut risus vitae velit lacinia gravida.',
 	},
 ];
-export { plantillas, testimoniosData, navigation, userNavigation, navigationSesion, steps };
+export {
+	plantillas,
+	testimoniosData,
+	navigation,
+	userNavigation,
+	navigationSesion,
+	steps,
+};
