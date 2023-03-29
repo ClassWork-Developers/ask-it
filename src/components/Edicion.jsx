@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Card from "./Cards";
+import Card from "./Cards";;
 export default function Edicion() {
   const [show, setShow] = useState("hidden");
   const [cards, setCards] = useState([]);
@@ -127,6 +127,12 @@ export default function Edicion() {
           />
         </svg>
       </p>
+			<div>
+				<button className="p-3 my-5 rounded-lg">Agregar pregunta</button>
+				<button className="p-3 my-5  bg-gray-900 text-white rounded-lg">
+					Guardar Formulario
+				</button>
+			</div>
     </>
   );
 }
