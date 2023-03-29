@@ -23,7 +23,7 @@ export default function UndefinedPath() {
         </svg>
       </div>
       <p>
-        La pagina que deseas ver no existe! Dirigete al inicio{" "}
+        La pagina que deseas ver no existe! Dirígete al inicio{" "}
         <strong
           className="cursor-pointer"
           onClick={() => {

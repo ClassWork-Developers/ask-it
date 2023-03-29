@@ -1,39 +1,6 @@
-import { useState } from 'react';
+import { steps } from '../assets/constantes';
 
-const ComoFunciona = () => {
-  const [steps] = useState([
-    {
-      id: 1,
-      title: 'Registrate',
-      description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut risus vitae velit lacinia gravida.',
-    },
-    {
-      id: 2,
-      title: 'Inicia sesión',
-      description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut risus vitae velit lacinia gravida.',
-    },
-    {
-      id: 3,
-      title: 'Genera tus preguntas',
-      description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut risus vitae velit lacinia gravida.',
-    },
-    {
-      id: 4,
-      title: 'Comparte tu formulario',
-      description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut risus vitae velit lacinia gravida.',
-    },
-    {
-      id: 5,
-      title: '¡Listo!',
-      description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut risus vitae velit lacinia gravida.',
-    },
-  ]);
-
+export default function ComoFunciona() {
   return (
     <div className='container mx-auto py-12 lg:px-8'>
       <h2 className='text-4xl font-extrabold text-gray-900 mb-8'>
@@ -57,5 +24,3 @@ const ComoFunciona = () => {
     </div>
   );
 };
-
-export default ComoFunciona;

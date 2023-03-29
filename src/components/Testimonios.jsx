@@ -1,31 +1,8 @@
 import { useQuery } from 'react-query';
 import Slider from 'react-slick';
+import { testimoniosData } from '../assets/constantes';
 
-const testimoniosData = [
-  {
-    id: 1,
-    name: 'Mario Casas',
-    email: 'mariocss@example.com',
-    comment: 'La aplicación es excelente, me ha ayudado mucho como reclutador',
-    image: 'https://picsum.photos/800/400?random=1',
-  },
-  {
-    id: 2,
-    name: 'Leid Smith',
-    email: 'leissmith@example.com',
-    comment: 'Ask it es la mejor herramienta para hacer formularios',
-    image: 'https://picsum.photos/800/400?random=2',
-  },
-  {
-    id: 3,
-    name: 'Danner Loms',
-    email: 'nnerloson@example.com',
-    comment: 'He mejorado mi conocimiento gracias a la comunidad de Ask it',
-    image: 'https://picsum.photos/800/400?random=3',
-  },
-];
-
-const Testimonios = () => {
+export default function Testimonios() {
   const settings = {
     dots: true,
     infinite: true,
@@ -80,5 +57,3 @@ const Testimonios = () => {
     </div>
   );
 };
-
-export default Testimonios;

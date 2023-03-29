@@ -3,16 +3,7 @@ import { Fragment } from 'react';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { useAuth0 } from '@auth0/auth0-react';
-
-const navigation = [
-	{ name: 'Crear', href: '/sesion', current: true },
-	{ name: 'Formularios', href: '/sesion/Formularios', current: false },
-	{ name: 'Buscar', href: '/sesion/Buscar', current: false },
-];
-const userNavigation = [
-	{ name: 'Your Profile', href: '#' },
-	{ name: 'Settings', href: '#' },
-];
+import { userNavigation, navigationSesion } from '../assets/constantes';
 
 function classNames(...classes) {
 	return classes.filter(Boolean).join(' ');

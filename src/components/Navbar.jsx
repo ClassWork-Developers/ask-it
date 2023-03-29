@@ -4,16 +4,7 @@ import { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { useAuth0 } from "@auth0/auth0-react";
-
-const navigation = [
-  { name: "Inicio", href: "#", current: true },
-  { name: "Sobre Nosotros", href: "#", current: false },
-  { name: "¿Cómo usar?", href: "#", current: false },
-];
-const userNavigation = [
-  { name: "Your Profile", href: "#" },
-  { name: "Settings", href: "#" },
-];
+import {navigation, userNavigation} from '../assets/constantes'
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");

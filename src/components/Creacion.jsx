@@ -13,12 +13,10 @@ export default function Creacion() {
 						{plantillas.map((plantilla, index) => (
 							<Link to="/sesion/edicion" key={index} >
 								<div className="group relative">
-									<div className="relative h-80 w-full overflow-hidden rounded-lg bg-white group-hover:opacity-75 sm:aspect-w-2 sm:aspect-h-1 sm:h-64 lg:aspect-w-1 lg:aspect-h-1">
-										<img
-											src={plantilla.imageSrc}
-											alt={plantilla.imageAlt}
-											className="h-full w-full object-cover object-center"
-										/>
+									<div className="relative w-full overflow-hidden rounded-lg bg-white group-hover:opacity-75 sm:aspect-w-2 sm:aspect-h-1 lg:aspect-w-1 lg:aspect-h-1">
+										<div className={plantilla.colores[0]+' h-20'}> </div>
+										<div className={plantilla.colores[1]+' h-20'}> </div>
+										<div className={plantilla.colores[2]+' h-20'}> </div>
 									</div>
 									<p className="mt-6 text-lg text-bold">{plantilla.name}</p>
 								</div>
