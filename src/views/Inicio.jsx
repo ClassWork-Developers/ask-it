@@ -15,7 +15,7 @@ export default function Inicio() {
             </p>
             <p className='text-lg font-hindi font-bold'>
               Responde y ve todos los formularios en los que haz participado
-              como cliente...
+              como cliente.
             </p>
           </div>
           <button className='w-1/3 bg-gray-800 p-4 rounded-lg text-white font-hindi font-bold  hover:border-black hover:border-2'>
@@ -26,7 +26,7 @@ export default function Inicio() {
           <img
             className='w-full h-screen object-cover object-center'
             src='https://images.pexels.com/photos/6476590/pexels-photo-6476590.jpeg?auto=compress&cs=tinysrgb&w=600'
-            alt=''
+            alt='Page of init Ask it'
           />
         </div>
       </header>
