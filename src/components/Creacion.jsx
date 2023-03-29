@@ -6,8 +6,6 @@ export default function Creacion() {
   const [preguntas, setPreguntas] = useState([]);
   console.log(preguntas);
 
-  let nose = document.querySelectorAll("#nose");
-  console.log(nose);
 
   const cambio = (text) => {
     console.log(text);
@@ -29,7 +27,6 @@ export default function Creacion() {
         preguntas.push(element.value);
       }
     });
-    console.log(preguntas);
   };
 
   const Show = () => {
@@ -80,7 +77,6 @@ export default function Creacion() {
           </svg>
         </h3>
         <li
-          id="nose"
           className={`${show} justify-between pt-7 pb-3 border-b-2 border-gray-400`}
           onClick={(e) => {
             cambio(e.target.textContent);
@@ -103,7 +99,6 @@ export default function Creacion() {
           </svg>
         </li>
         <li
-          id="nose"
           className={`${show} justify-between pt-7 pb-3 border-b-2 border-gray-400`}
           onClick={(e) => {
             cambio(e.target.textContent);
