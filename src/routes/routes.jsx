@@ -31,7 +31,6 @@ export default function Router() {
 					{/* Creación y/o edición de un formulario */}
 					<Route path="Edicion" element={<Edicion />} />
 				</Route>
-				{/* <Route path="/Log" element={<Log />} /> */}
 				<Route path="*" element={<UndefinedPath />} />
 			</Routes>
 		</BrowserRouter>
