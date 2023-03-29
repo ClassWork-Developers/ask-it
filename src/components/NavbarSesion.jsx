@@ -46,7 +46,7 @@ export default function Nav() {
 								/>
 							</div>
 							<div className="hidden md:flex flex-col space-x-4 grow">
-								{navigation.map((item) => (
+								{navigationSesion.map((item) => (
 									<a
 										key={item.name}
 										href={item.href}
@@ -150,7 +150,7 @@ export default function Nav() {
 							</div>
 							<Disclosure.Panel className="md:hidden">
 								<div className="space-y-1 px-2 pt-2 pb-3 sm:px-3">
-									{navigation.map((item) => (
+									{navigationSesion.map((item) => (
 										<Disclosure.Button
 											key={item.name}
 											as="a"
