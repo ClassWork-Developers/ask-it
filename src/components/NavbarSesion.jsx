@@ -1,3 +1,4 @@
+import { Circles } from "react-loader-spinner";
 import { Outlet } from 'react-router-dom';
 import { Fragment } from 'react';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
@@ -22,7 +23,19 @@ export default function Nav() {
 	const { logout, loginWithRedirect, user, isAuthenticated, isLoading } = useAuth0();
 
 	if (isLoading) {
-		return <div>cargando...</div>;
+		return (
+			<div className="flex items-center justify-center min-h-screen">
+			  <Circles
+				height="80"
+				width="80"
+				color="gray"
+				ariaLabel="circles-loading"
+				wrapperStyle={{}}
+				wrapperClass=""
+				visible={true}
+			  />
+			</div>
+		  );
 	}
 
 	return (

@@ -17,7 +17,7 @@ function Respuesta(pregunta) {
 			break;
 	}
 }
-export default function Card() {
+export default function Card({text}) {
 	const [tpreSeleccionado, setTpreSeleccionado] = useState(0);
 	const [preguntas, setPreguntas] = useState([
 		{
@@ -46,6 +46,7 @@ export default function Card() {
 								</p>
 								<div className="mt-2 grow">
 									<textarea
+									value={text?text:null}
 										id="pregunta"
 										name="about"
 										rows={3}
