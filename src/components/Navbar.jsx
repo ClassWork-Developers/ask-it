@@ -3,6 +3,8 @@ import { Fragment } from 'react';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { useAuth0 } from '@auth0/auth0-react';
+import {useMutation} from 'react-query';
+import axios from 'axios';
 
 const navigation = [
 	{ name: 'Inicio', href: '#', current: true },
@@ -20,7 +22,14 @@ function classNames(...classes) {
 
 export default function Nav() {
 	const { logout, loginWithRedirect, user, isAuthenticated, isLoading } = useAuth0();
-
+/* 	const {mutate:registerE}= useMutation((data)=>
+	console.log(data),
+	axios.post('http://localhost:3000/CreateUser',data),{
+		onSuccess: (response)=>{
+			console.log(response)
+		},
+		onError: (err)=> console.log(err)
+	}) */
 	if (isLoading) {
 		return <div>cargando...</div>;
 	}

@@ -7,8 +7,12 @@ import Formularios from "../components/Formularios";
 import Buscar from "../components/Buscar";
 import Respondidos from "../components/Respondidos";
 import UndefinedPath from "../components/UndefinedPath";
+import {QueryClient, QueryClientProvider} from 'react-query'
+import { ReactQueryDevtools } from 'react-query/devtools';
+const queryClient = new QueryClient()
 export default function Router() {
 	return (
+		<QueryClientProvider client={queryClient}>
 		<BrowserRouter>
 			<Routes>
 				<Route path="/" element={<Navbar />}>
@@ -25,5 +29,7 @@ export default function Router() {
 				<Route path="*" element={<UndefinedPath />} />
 			</Routes>
 		</BrowserRouter>
+		<ReactQueryDevtools initialIsOpen={false} />
+		</QueryClientProvider>
 	);
 }
