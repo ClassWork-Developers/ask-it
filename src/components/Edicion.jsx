@@ -2,7 +2,7 @@ import { useState } from "react";
 import Card from "./Cards";;
 export default function Edicion() {
   const [show, setShow] = useState("hidden");
-  const [cards, setCards] = useState([]);
+  const [cards, setCards] = useState([<Card/>]);
   const Agregar = (text) => {
 	text ? setCards([...cards, <Card text={text}/>]):setCards([...cards, <Card/>]);
   };
