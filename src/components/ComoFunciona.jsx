@@ -35,7 +35,7 @@ const ComoFunciona = () => {
   ]);
 
   return (
-    <div className='container mx-auto py-12 lg:px-8'>
+    <div className='container mx-auto py-12 px-4 lg:px-8'>
       <h2 className='text-4xl font-extrabold text-gray-900 mb-8'>
         ¿Cómo funciona?
       </h2>

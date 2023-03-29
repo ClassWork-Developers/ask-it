@@ -1,0 +1,13 @@
+/* Tablet */
+@media (min-width: 768px) {
+  .tater {
+    max-width: 720px;
+  }
+}
+
+/* Desktop */
+@media (min-width: 1024px) {
+  .tater {
+    max-width: 960px;
+  }
+}
