@@ -150,7 +150,7 @@ function Respuesta(pregunta, respuestas) {
 			);
 	}
 }
-export default function Card() {
+export default function Card({text}) {
 	const [tpreSeleccionado, setTpreSeleccionado] = useState(0);
 	const [preguntas, setPreguntas] = useState([
 		{
