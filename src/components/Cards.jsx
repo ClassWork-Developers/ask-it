@@ -1,29 +1,161 @@
 import { Popover, Transition } from '@headlessui/react';
-import { ChevronDownIcon } from '@heroicons/react/20/solid';
-import { Fragment, useState } from 'react';
-function Respuesta(pregunta) {
-	switch (pregunta) {
-		case 1:
+import {
+	ClipboardDocumentIcon,
+	TrashIcon,
+	PlusCircleIcon,
+	MinusCircleIcon,
+} from '@heroicons/react/20/solid';
+import { useState } from 'react';
+function Respuesta(pregunta, respuestas) {
+	console.log(respuestas);
+	switch (pregunta.pregunta) {
+		case 'textarea':
 			return (
-				<>
-					<textarea name="" id="" cols="30" rows="10"></textarea>
-				</>
+				<fieldset>
+					<label
+						htmlFor="about"
+						className="block text-sm font-medium leading-6 text-gray-900"
+					>
+						About
+					</label>
+					<div className="mt-2">
+						<textarea
+							id="about"
+							name="about"
+							rows={3}
+							className="block w-full rounded-md border-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:py-1.5 sm:text-sm sm:leading-6"
+							defaultValue={''}
+						/>
+					</div>
+				</fieldset>
 			);
-		case 2:
-			<input type="checkbox" name="" id="" />;
-			break;
-		default:
-			<input type="radio" name="" id="" />;
-			break;
+		case 'checkbox':
+			return (
+				<fieldset>
+					<div className="mt-6 space-y-6">
+						<div className="relative flex gap-x-3">
+							<div className="flex h-6 items-center">
+								<input
+									id="comments"
+									name="comments"
+									type="checkbox"
+									className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
+								/>
+							</div>
+							<div className="text-sm leading-6">
+								<label htmlFor="comments" className="font-medium text-gray-900">
+									Comments
+								</label>
+							</div>
+						</div>
+						<div className="relative flex gap-x-3">
+							<div className="flex h-6 items-center">
+								<input
+									id="candidates"
+									name="candidates"
+									type="checkbox"
+									className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
+								/>
+							</div>
+							<div className="text-sm leading-6">
+								<label htmlFor="candidates" className="font-medium text-gray-900">
+									Candidates
+								</label>
+							</div>
+						</div>
+						<div className="relative flex gap-x-3">
+							<div className="flex h-6 items-center">
+								<input
+									id="offers"
+									name="offers"
+									type="checkbox"
+									className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
+								/>
+							</div>
+							<div className="text-sm leading-6">
+								<label htmlFor="offers" className="font-medium text-gray-900">
+									Offers
+								</label>
+							</div>
+						</div>
+					</div>
+					<div>
+						<input type="text" name="" id="" placeholder="Agregar otra respuesta" />
+						<button className="m-1 p-1 px-2">
+							<MinusCircleIcon className="block h-6 w-6" aria-hidden="true" />
+						</button>
+						<button className="p-3 my-5 rounded-lg">
+							<PlusCircleIcon className="block h-6 w-6" aria-hidden="true" />
+						</button>
+					</div>
+				</fieldset>
+			);
+		default: //radio
+			return (
+				<fieldset>
+					<div className="mt-6 space-y-6">
+						<div className="flex items-center gap-x-3">
+							<input
+								id="push-everything"
+								name="push-notifications"
+								type="radio"
+								className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
+							/>
+							<label
+								htmlFor="push-everything"
+								className="block text-sm font-medium leading-6 text-gray-900"
+							>
+								Everything
+							</label>
+						</div>
+						<div className="flex items-center gap-x-3">
+							<input
+								id="push-email"
+								name="push-notifications"
+								type="radio"
+								className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
+							/>
+							<label
+								htmlFor="push-email"
+								className="block text-sm font-medium leading-6 text-gray-900"
+							>
+								Same as email
+							</label>
+						</div>
+						<div className="flex items-center gap-x-3">
+							<input
+								id="push-nothing"
+								name="push-notifications"
+								type="radio"
+								className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
+							/>
+							<label
+								htmlFor="push-nothing"
+								className="block text-sm font-medium leading-6 text-gray-900"
+							>
+								No push notifications
+							</label>
+						</div>
+					</div>
+					<div>
+						<input type="text" name="" id="" placeholder="Agregar otra respuesta" />
+						<button className="m-1 p-1 px-2">
+							<MinusCircleIcon className="block h-6 w-6" aria-hidden="true" />
+						</button>
+						<button className="p-3 my-5 rounded-lg">
+							<PlusCircleIcon className="block h-6 w-6" aria-hidden="true" />
+						</button>
+					</div>
+				</fieldset>
+			);
 	}
 }
 export default function Card() {
-	const [tpreSeleccionado, setTpreSeleccionado] = useState(0);
 	const [preguntas, setPreguntas] = useState([
 		{
 			pregunta: 'Define tu pregunta',
 			descripcion: 'Agrega una descripción',
-			type: 0,
+			tipo: 'checkbox',
 			respuestas: [],
 		},
 	]);
@@ -32,10 +164,14 @@ export default function Card() {
 			{preguntas.map((pregunta, preIndex) => (
 				<div className="max-w-[750px] mx-auto" key={preIndex}>
 					<div className="flex justify-end">
-						{/* Serán iconos sin texto */}
-						<button className="m-1 p-1 px-2">Duplicar</button>
-						{/* Serán iconos sin texto */}
-						<button className="m-1 p-1 px-2">Eliminar</button>
+						{/* Duplicar pregunta */}
+						<button className="m-1 p-1 px-2">
+							<ClipboardDocumentIcon className="block h-6 w-6" aria-hidden="true" />
+						</button>
+						{/* Eliminar pregunta */}
+						<button className="m-1 p-1 px-2">
+							<TrashIcon className="block h-6 w-6" aria-hidden="true" />
+						</button>
 					</div>
 					{/* card */}
 					<div className="bg-zinc-100 p-5">
@@ -69,19 +205,8 @@ export default function Card() {
 								</div>
 							</div>
 						</header>
-						<Respuesta pregunta={pregunta.type} />
-						{/* {tipoDePregunta.map((tipo, tipIndex) =>
-						)} */}
-						<div></div>
-						<div className="relative mt-8 flex items-center gap-x-4">
-							<img src="" alt="" className="h-10 w-10 rounded-full bg-gray-50" />
-							<div className="text-sm leading-6">
-								<p className="font-semibold text-gray-900">
-									<span className="absolute inset-0" />
-									post.authorname
-								</p>
-								<p className="text-gray-600">post.authorrole</p>
-							</div>
+						<div className="max-w-lg mx-auto">
+							<Respuesta pregunta={pregunta.tipo} respuestas={pregunta.respuestas} />
 						</div>
 					</div>
 				</div>

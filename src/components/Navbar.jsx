@@ -51,7 +51,7 @@ export default function Nav() {
                     <div className="flex-shrink-0">
                       <img
                         className="inline-block h-10 w-10 "
-                        src="../../public/logo.svg"
+                        src="/logo.svg"
                         alt=""
                       />
                     </div>

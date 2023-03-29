@@ -37,7 +37,7 @@ export default function Nav() {
 							<div className="flex-shrink-0 m-6">
 								<img
 									className="h-20 w-20"
-									src="../../public/logo.svg"
+									src="/logo.svg"
 									alt="Your Company"
 								/>
 							</div>

@@ -1,4 +1,4 @@
-import Card from './Cards'
+import Card from './Cards';
 export default function Edicion() {
 	return (
 		<>
@@ -28,6 +28,12 @@ export default function Edicion() {
 				</div>
 			</section>
 			<Card />
+			<div>
+				<button className="p-3 my-5 rounded-lg">Agregar pregunta</button>
+				<button className="p-3 my-5  bg-gray-900 text-white rounded-lg">
+					Guardar Formulario
+				</button>
+			</div>
 		</>
 	);
 }
