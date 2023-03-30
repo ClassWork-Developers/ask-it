@@ -6,16 +6,34 @@ import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { useAuth0 } from '@auth0/auth0-react';
 import { navigation, userNavigation } from '../assets/constantes';
+import {useMutation} from 'react-query';
+import axios from 'axios';
 
 function classNames(...classes) {
 	return classes.filter(Boolean).join(' ');
 }
 
 export default function Nav() {
-	const { logout, loginWithRedirect, user, isAuthenticated, isLoading } = useAuth0();
+	/* const { logout, loginWithRedirect, user, isAuthenticated, isLoading } = useAuth0(); */
 	const [inicioViewPort, setinicioViewPort] = useState(true);
 	const [nosotrosViewPort, setnosotrosViewPort] = useState(false);
 	const [usoViewPort, setusoViewPort] = useState(false);
+	//CONEXION CON LA API
+	const {mutate:InicioE}= useMutation((data)=>
+      axios.post('http://localhost:3000/CreateUser',data),{  
+			onSuccess: (response)=>{
+          console.log(response)
+        },
+        onError: (err)=> console.log(err)
+      }) 
+    function setInicio(user){
+        InicioE(user)
+      } 
+		function handleLogin(){
+			/* loginWithRedirect().then()_ */
+				setInicio(user)
+
+		}
 	function scroll() {
 		const inicioId = document.getElementById('inicio').getBoundingClientRect();
 		const nosotrosId = document.getElementById('nosotros').getBoundingClientRect();
@@ -60,7 +78,7 @@ export default function Nav() {
 			</div>
 		);
 	}
-
+	
 	return (
 		<>
 			<Disclosure as="nav" className="bg-white min-h-full sticky top-0 z-[99]">
@@ -94,7 +112,8 @@ export default function Nav() {
 											{!isAuthenticated && (
 												<h1
 													onClick={() => {
-														loginWithRedirect();
+														/* handleLogin(); 
+														redirecciona al login o inicio*/
 													}}
 													className="flex gap-2 items-center text-right rounded-md px-3 py-2 text-sm font-medium cursor-pointer text-gray-800 hover:bg-gray-700 hover:text-white"
 												>
@@ -207,7 +226,7 @@ export default function Nav() {
 								{!isAuthenticated && (
 									<h1
 										onClick={() => {
-											loginWithRedirect();
+											handleLogin();
 										}}
 										className="flex gap-2 items-center text-right rounded-md px-3 py-2 text-base font-medium text-gray-800 hover:bg-gray-700 hover:text-white cursor-pointer"
 									>

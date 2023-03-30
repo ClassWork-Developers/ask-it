@@ -10,10 +10,10 @@ export default function Login() {
         },
         onError: (err)=> console.log(err)
       })
-      function setInicio(user)
-      
+      function setInicio(nombre, clave, icon, email){
+        InicioE({nombre, clave, icon, email})
+      }
     return (
-      <div>Login</div>
+      <></>
     )
   }
-  
