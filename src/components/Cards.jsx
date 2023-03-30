@@ -162,7 +162,7 @@ function Respuesta({ pregunta, respuestas }) {
       );
   }
 }
-export default function Card({ text }) {
+export default function Card({ text, key }) {
   const [tpreSeleccionado, setTpreSeleccionado] = useState(0);
   const [questionType, setQuestionType] = useState("Texto");
   const [preguntas, setPreguntas] = useState([
@@ -176,26 +176,14 @@ export default function Card({ text }) {
 
   function Selected(response) {
     setQuestionType(response);
+    console.log(key)
   }
   return (
     <>
       {preguntas.map((pregunta, preIndex) => (
-        <div className="max-w-[750px] mx-auto" key={preIndex}>
-          <div className="flex justify-end">
-            {/* Duplicar pregunta */}
-            <button className="m-1 p-1 px-2">
-              <ClipboardDocumentIcon
-                className="block h-6 w-6"
-                aria-hidden="true"
-              />
-            </button>
-            {/* Eliminar pregunta */}
-            <button className="m-1 p-1 px-2">
-              <TrashIcon className="block h-6 w-6" aria-hidden="true" />
-            </button>
-          </div>
+        <div className="w-full mx-auto" key={preIndex}>
           {/* card */}
-          <div className="bg-zinc-100 p-5">
+          <div className="bg-zinc-100 p-5 my-3">
             <header className="w-full">
               <div className="flex">
                 <p className="mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">
