@@ -15,7 +15,7 @@ const ContactoSeccion = () => {
               Nombre
             </label>
             <input
-              className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+              className='shadow-md appearance-none border rounded w-full h-10 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
               id='name'
               type='text'
               placeholder='Tu nombre'
@@ -29,7 +29,7 @@ const ContactoSeccion = () => {
               Correo electrónico
             </label>
             <input
-              className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+              className='shadow-md appearance-none border rounded w-full h-10 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
               id='email'
               type='email'
               placeholder='Tu correo electrónico'
@@ -43,7 +43,7 @@ const ContactoSeccion = () => {
               Mensaje
             </label>
             <textarea
-              className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+              className='shadow-md appearance-none border rounded w-full h-32 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
               id='message'
               rows='8'
               placeholder='Escribe tu mensaje'

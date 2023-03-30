@@ -1,18 +1,10 @@
+import { Circles } from "react-loader-spinner";
 import { Outlet } from 'react-router-dom';
 import { Fragment } from 'react';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { useAuth0 } from '@auth0/auth0-react';
-
-const navigation = [
-	{ name: 'Crear', href: '/sesion', current: true },
-	{ name: 'Formularios', href: '/sesion/Formularios', current: false },
-	{ name: 'Buscar', href: '/sesion/Buscar', current: false },
-];
-const userNavigation = [
-	{ name: 'Your Profile', href: '#' },
-	{ name: 'Settings', href: '#' },
-];
+import { userNavigation, navigationSesion } from '../assets/constantes';
 
 function classNames(...classes) {
 	return classes.filter(Boolean).join(' ');
@@ -22,7 +14,19 @@ export default function Nav() {
 	const { logout, loginWithRedirect, user, isAuthenticated, isLoading } = useAuth0();
 
 	if (isLoading) {
-		return <div>cargando...</div>;
+		return (
+			<div className="flex items-center justify-center min-h-screen">
+			  <Circles
+				height="80"
+				width="80"
+				color="gray"
+				ariaLabel="circles-loading"
+				wrapperStyle={{}}
+				wrapperClass=""
+				visible={true}
+			  />
+			</div>
+		  );
 	}
 
 	return (
@@ -37,12 +41,12 @@ export default function Nav() {
 							<div className="flex-shrink-0 m-6">
 								<img
 									className="h-20 w-20"
-									src="../../public/logo.svg"
+									src="/logo.svg"
 									alt="Your Company"
 								/>
 							</div>
 							<div className="hidden md:flex flex-col space-x-4 grow">
-								{navigation.map((item) => (
+								{navigationSesion.map((item) => (
 									<a
 										key={item.name}
 										href={item.href}
@@ -146,7 +150,7 @@ export default function Nav() {
 							</div>
 							<Disclosure.Panel className="md:hidden">
 								<div className="space-y-1 px-2 pt-2 pb-3 sm:px-3">
-									{navigation.map((item) => (
+									{navigationSesion.map((item) => (
 										<Disclosure.Button
 											key={item.name}
 											as="a"
