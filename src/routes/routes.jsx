@@ -8,7 +8,8 @@ import Buscar from '../components/Buscar';
 import Respondidos from '../components/Respondidos';
 import Edicion from '../components/Edicion';
 import UndefinedPath from '../components/UndefinedPath';
-// import Log from "../views/Log";
+import Register from '../views/Register'
+import Login from '../views/Login'
 
 export default function Router() {
   return (
@@ -17,6 +18,8 @@ export default function Router() {
         {/* Landing Page */}
         <Route path='/' element={<Navbar />}>
           <Route index element={<Inicio />} />
+          <Route path='registro' element={<Register />} />
+          <Route path='login' element={<Login />} />
         </Route>
         {/* Sesión iniciada */}
         <Route path='/sesion' element={<NavbarSesion />}>
