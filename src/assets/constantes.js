@@ -1,4 +1,6 @@
 import Jeida from './1.jpg'
+import Mario from './2.jpg'
+import Danner from './3.jpg'
 
 const plantillas = [
 	{
@@ -20,21 +22,21 @@ const testimoniosData = [
 		name: 'Mario Casas',
 		email: 'mariocss@example.com',
 		comment: 'La aplicación es excelente, me ha ayudado mucho como reclutador',
-		image: Jeida,
+		image: Mario,
 	},
 	{
 		id: 2,
 		name: 'Jeida Smith',
 		email: 'leissmith@example.com',
 		comment: 'Ask it es la mejor herramienta para hacer formularios',
-		image: 'https://picsum.photos/800/400?random=2',
+		image: Jeida,
 	},
 	{
 		id: 3,
 		name: 'Danner Loms',
 		email: 'nnerloson@example.com',
 		comment: 'He mejorado mi conocimiento gracias a la comunidad de Ask it',
-		image: 'https://picsum.photos/800/400?random=3',
+		image: Danner,
 	},
 ];
 const navigation = [
