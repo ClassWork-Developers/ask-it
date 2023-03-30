@@ -1,11 +1,26 @@
 import { useState } from "react";
-import Card from "./Cards";;
+import {
+  ClipboardDocumentIcon,
+  TrashIcon,
+  BarsArrowDownIcon,
+  CheckCircleIcon,
+  PlusIcon,
+  MinusCircleIcon,
+} from "@heroicons/react/20/solid";
+import Card from "./Cards";
 export default function Edicion() {
-  const [show, setShow] = useState("hidden");
-  const [cards, setCards] = useState([<Card/>]);
-  const Agregar = (text) => {
-	text ? setCards([...cards, <Card text={text}/>]):setCards([...cards, <Card/>]);
+  const GetId = () => {
+    return Math.floor(Math.random() * 1000);
   };
+  const [show, setShow] = useState("hidden");
+  const [cards, setCards] = useState([{ id: GetId(), card: <Card key={0} /> }]);
+
+  const Agregar = (text) => {
+    text
+      ?  setCards([...cards, { id: GetId(), card: <Card text={text} /> }])
+      : setCards([...cards, { id: GetId(), card: <Card /> }]);
+  };
+
   const Show = () => {
     show == "hidden" ? setShow("flex") : setShow("hidden");
   };
@@ -44,20 +59,7 @@ export default function Edicion() {
           onClick={() => Show()}
         >
           Sugerencias de preguntas
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            class="w-6 h-6"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M3 4.5h14.25M3 9h9.75M3 13.5h9.75m4.5-4.5v12m0 0l-3.75-3.75M17.25 21L21 17.25"
-            />
-          </svg>
+          <BarsArrowDownIcon className="h-6 w-6" />
         </h3>
         <li
           className={`${show} justify-between pt-7 pb-3 border-b-2 border-gray-400`}
@@ -65,21 +67,7 @@ export default function Edicion() {
             Agregar(e.target.textContent);
           }}
         >
-          como salirse de la carrera?{" "}
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            class="w-6 h-6"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-            />
-          </svg>
+          como salirse de la carrera? <CheckCircleIcon className="h-6 w-6" />
         </li>
         <li
           className={`${show} justify-between pt-7 pb-3 border-b-2 border-gray-400`}
@@ -87,24 +75,36 @@ export default function Edicion() {
             Agregar(e.target.textContent);
           }}
         >
-          como salirse de la carrera?{" "}
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            class="w-6 h-6"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-            />
-          </svg>
+          como salirse de la carrera? <CheckCircleIcon className="h-6 w-6" />
         </li>
       </ul>
-      <div>{cards.map((pregunta) => pregunta)}</div>
+      <div className="w-full flex flex-col items-center">
+        {cards.map((pregunta) => (
+          <div className="w-1/2 fl ex flex-col items-center">
+            <div className="w-full flex justify-end">
+              {/* Duplicar pregunta */}
+              <button className="m-1 p-1 px-2">
+                <ClipboardDocumentIcon
+                  className="block h-6 w-6"
+                  aria-hidden="true"
+                />
+              </button>
+              {/* Eliminar pregunta */}
+              <button className="m-1 p-1 px-2">
+                <TrashIcon
+                  onClick={() => {
+                    setCards(cards.filter((x) => x.id !== pregunta.id));
+                  }}
+                  className="block h-6 w-6"
+                  aria-hidden="true"
+                />
+                {pregunta.id}
+              </button>
+            </div>
+            {pregunta.card}
+          </div>
+        ))}
+      </div>
       <p
         className="w-1/4 m-4 bg-gray-700 flex items-center justify-center font-exe font-bold p-3 cursor-pointer text-lg rounded-lg"
         onClick={() => {
@@ -112,27 +112,14 @@ export default function Edicion() {
         }}
       >
         Agregar pregunta
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke-width="1.5"
-          stroke="currentColor"
-          class="w-6 h-6"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M12 6v12m6-6H6"
-          />
-        </svg>
+        <PlusIcon className="h-6 w-6" />
       </p>
-			<div>
-				<button className="p-3 my-5 rounded-lg">Agregar pregunta</button>
-				<button className="p-3 my-5  bg-gray-900 text-white rounded-lg">
-					Guardar Formulario
-				</button>
-			</div>
+      <div>
+        <button className="p-3 my-5 rounded-lg">Agregar pregunta</button>
+        <button className="p-3 my-5  bg-gray-900 text-white rounded-lg">
+          Guardar Formulario
+        </button>
+      </div>
     </>
   );
 }

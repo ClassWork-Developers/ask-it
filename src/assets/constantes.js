@@ -1,3 +1,5 @@
+import Jeida from './1.jpg'
+
 const plantillas = [
 	{
 		name: 'Formulario en blanco',
@@ -18,7 +20,7 @@ const testimoniosData = [
 		name: 'Mario Casas',
 		email: 'mariocss@example.com',
 		comment: 'La aplicación es excelente, me ha ayudado mucho como reclutador',
-		image: 'https://picsum.photos/800/400?random=1',
+		image: Jeida,
 	},
 	{
 		id: 2,

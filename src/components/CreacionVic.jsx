@@ -1,3 +1,4 @@
+import {BarsArrowDownIcon, CheckCircleIcon, PlusIcon} from '@heroicons/react/20/solid';
 import React, { useState } from "react";
 export default function Creacion() {
   const [show, setShow] = useState("hidden");
@@ -61,20 +62,7 @@ export default function Creacion() {
           onClick={() => Show()}
         >
           Sugerencias de preguntas
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            class="w-6 h-6"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M3 4.5h14.25M3 9h9.75M3 13.5h9.75m4.5-4.5v12m0 0l-3.75-3.75M17.25 21L21 17.25"
-            />
-          </svg>
+          <BarsArrowDownIcon/>
         </h3>
         <li
           className={`${show} justify-between pt-7 pb-3 border-b-2 border-gray-400`}
@@ -83,20 +71,7 @@ export default function Creacion() {
           }}
         >
           como salirse de la carrera?{" "}
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            class="w-6 h-6"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-            />
-          </svg>
+          <CheckCircleIcon/>
         </li>
         <li
           className={`${show} justify-between pt-7 pb-3 border-b-2 border-gray-400`}
@@ -105,20 +80,7 @@ export default function Creacion() {
           }}
         >
           como salirse de la carrera?{" "}
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            class="w-6 h-6"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-            />
-          </svg>
+          <CheckCircleIcon/>
         </li>
       </ul>
 
@@ -144,20 +106,7 @@ export default function Creacion() {
           }}
         >
           Agregar pregunta
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            class="w-6 h-6"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M12 6v12m6-6H6"
-            />
-          </svg>
+          <PlusIconu/>
         </p>
 
         <button
