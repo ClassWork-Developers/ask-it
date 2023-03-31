@@ -1,3 +1,7 @@
+import Jeida from './1.jpg'
+import Mario from './2.jpg'
+import Danner from './3.jpg'
+
 const plantillas = [
 	{
 		name: 'Formulario en blanco',
@@ -18,21 +22,21 @@ const testimoniosData = [
 		name: 'Mario Casas',
 		email: 'mariocss@example.com',
 		comment: 'La aplicación es excelente, me ha ayudado mucho como reclutador',
-		image: 'https://picsum.photos/800/400?random=1',
+		image: Mario,
 	},
 	{
 		id: 2,
-		name: 'Leid Smith',
+		name: 'Jeida Smith',
 		email: 'leissmith@example.com',
 		comment: 'Ask it es la mejor herramienta para hacer formularios',
-		image: 'https://picsum.photos/800/400?random=2',
+		image: Jeida,
 	},
 	{
 		id: 3,
 		name: 'Danner Loms',
 		email: 'nnerloson@example.com',
 		comment: 'He mejorado mi conocimiento gracias a la comunidad de Ask it',
-		image: 'https://picsum.photos/800/400?random=3',
+		image: Danner,
 	},
 ];
 const navigation = [
@@ -51,6 +55,11 @@ const navigation = [
 		href: 'uso',
 		viewPort: 'usoViewPort'
 	},
+	{
+		name: 'Contacto',
+		href: 'contacto',
+		viewPort: 'contactoViewPort'
+	},
 ];
 const userNavigation = [
 	{ name: 'Tu perfil', href: '#' },
@@ -66,31 +75,31 @@ const steps = [
 		id: 1,
 		title: 'Registrate',
 		description:
-			'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut risus vitae velit lacinia gravida.',
+			'Regístrate hoy y comienza a crear formularios y encuestas personalizadas en minutos',
 	},
 	{
 		id: 2,
 		title: 'Inicia sesión',
 		description:
-			'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut risus vitae velit lacinia gravida.',
+			'Inicia sesión para acceder a tus formularios y encuestas creados y responder a aquellos que te hayan sido enviados',
 	},
 	{
 		id: 3,
 		title: 'Genera tus preguntas',
 		description:
-			'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut risus vitae velit lacinia gravida.',
+			'¿Necesitas recolectar información de tus clientes o empleados? Crea fácilmente formularios y encuestas personalizadas con nosotros',
 	},
 	{
 		id: 4,
 		title: 'Comparte tu formulario',
 		description:
-			'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut risus vitae velit lacinia gravida.',
+			'¡Haz que tu contenido llegue a más personas y obtén la información que necesitas para tomar decisiones informadas!',
 	},
 	{
 		id: 5,
 		title: '¡Listo!',
 		description:
-			'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut risus vitae velit lacinia gravida.',
+			'Ahora puedes empezar a usar Ask It y crear tus propios formularios y encuestas de manera fácil y rápida',
 	},
 ];
 export {

@@ -1,9 +1,13 @@
 import { Circles } from "react-loader-spinner";
-import { Outlet } from "react-router-dom";
+import { Outlet, Link } from "react-router-dom";
 import { Link as LinkScroll } from "react-scroll";
 import { Fragment, useState } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
-import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import {
+  Bars3Icon,
+  XMarkIcon,
+  ArrowLeftOnRectangleIcon,
+} from "@heroicons/react/24/outline";
 import { useAuth0 } from "@auth0/auth0-react";
 import { navigation, userNavigation } from "../assets/constantes";
 
@@ -17,6 +21,7 @@ export default function Nav() {
   const [inicioViewPort, setinicioViewPort] = useState(true);
   const [nosotrosViewPort, setnosotrosViewPort] = useState(false);
   const [usoViewPort, setusoViewPort] = useState(false);
+  const [contactoViewPort, setcontactoViewPort] = useState(false);
 
   function scroll() {
     const inicioId = document.getElementById("inicio").getBoundingClientRect();
@@ -24,6 +29,10 @@ export default function Nav() {
       .getElementById("nosotros")
       .getBoundingClientRect();
     const usoId = document.getElementById("uso").getBoundingClientRect();
+    const contactoId = document
+      .getElementById("contacto")
+      .getBoundingClientRect();
+
     setinicioViewPort(
       inicioId.top <
         (window.innerHeight || document.documentElement.clientHeight) &&
@@ -39,6 +48,11 @@ export default function Nav() {
         (window.innerHeight || document.documentElement.clientHeight) &&
         usoId.bottom > 0
     );
+    setcontactoViewPort(
+      contactoId.top <
+        (window.innerHeight || document.documentElement.clientHeight) &&
+        usoId.bottom > 0
+    );
     console.log();
   }
   function viewPort(item) {
@@ -47,6 +61,8 @@ export default function Nav() {
         return nosotrosViewPort;
       case "usoViewPort":
         return usoViewPort;
+      case "contactoViewPort":
+        return contactoViewPort;
       default:
         return inicioViewPort;
     }
@@ -103,28 +119,12 @@ export default function Nav() {
                         </LinkScroll>
                       ))}
                       {!isAuthenticated && (
-                        <h1
-                          onClick={() => {
-                            loginWithRedirect();
-                          }}
-                          className="flex gap-2 items-center text-right rounded-md px-3 py-2 text-sm font-medium cursor-pointer text-gray-800 hover:bg-gray-700 hover:text-white"
-                        >
-                          Iniciar Sesión
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            strokeWidth={1.5}
-                            stroke="currentColor"
-                            className="w-6 h-6"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75"
-                            />
-                          </svg>
-                        </h1>
+                        <Link to={"/login"}>
+                          <p className="flex gap-2 items-center text-right rounded-md px-3 py-2 text-sm font-medium cursor-pointer text-gray-800 hover:bg-gray-700 hover:text-white">
+                            Iniciar Sesión
+                            <ArrowLeftOnRectangleIcon className="h-6 w-6" />
+                          </p>
+                        </Link>
                       )}
                     </div>
                   </div>
@@ -217,28 +217,12 @@ export default function Nav() {
                   </Disclosure.Button>
                 ))}
                 {!isAuthenticated && (
-                  <h1
-                    onClick={() => {
-                      loginWithRedirect();
-                    }}
-                    className="flex gap-2 items-center text-right rounded-md px-3 py-2 text-base font-medium text-gray-800 hover:bg-gray-700 hover:text-white cursor-pointer"
-                  >
-                    Iniciar Sesión
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth={1.5}
-                      stroke="currentColor"
-                      className="w-6 h-6"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75"
-                      />
-                    </svg>
-                  </h1>
+                  <Link to={"/login"}>
+                    <h1 className="flex gap-2 items-center text-right rounded-md px-3 py-2 text-base font-medium text-gray-800 hover:bg-gray-700 hover:text-white cursor-pointer">
+                      Iniciar Sesión
+                      <ArrowLeftOnRectangleIcon className="w-6 h-6" />
+                    </h1>
+                  </Link>
                 )}
               </div>
               {isAuthenticated && (
