@@ -18,9 +18,10 @@ export default function Creacion() {
           "currentUser",
           JSON.stringify({
             nombre: response.data.nombre,
-            correo: response.data.correo,
-            icon: response.data.icon,
             token: response.data.token,
+            status: response.data.status,
+            icon: response.data.icon,
+            id: response.data.id,
             type: "estudiante",
           })
         );

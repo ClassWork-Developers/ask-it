@@ -27,11 +27,10 @@ function Login() {
           "currentUser",
           JSON.stringify({
             nombre: response.data.nombre,
-            correo: response.data.correo,
-            clave: response.data.clave,
+            token: response.data.token,
+            status: response.data.status,
             icon: response.data.icon,
-            clave_especial: response.data.clave_especial,
-            token: response.data.clave_especial,
+            id: response.data.id,
             type: "docente",
           })
         );
