@@ -2,12 +2,44 @@ import { Fragment, useState } from "react";
 import { Listbox, Transition } from "@headlessui/react";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
 import { useAuth0 } from "@auth0/auth0-react";
+import { useMutation } from "react-query";
+import axios from "axios";
 const user = [{ rol: "Estudiante" }, { rol: "Profesor" }];
 
 function Login() {
   const [selected, setSelected] = useState(user[0]);
   const { loginWithRedirect } = useAuth0();
   let classButton = "w-full p-3  shadow-lg text-sm rounded-lg";
+  const [correo, setCorreo] = useState("");
+  const [clave, setClave] = useState("");
+  //Conexion con la API
+  const { mutate: InicioA } = useMutation(
+    (data) => axios.post("http://localhost:3000/LoginAdmin", data),
+    {
+      onSuccess: (response) => {
+        console.log(response.data);
+        localStorage.setItem(
+          "currentUser",
+          JSON.stringify({
+            nombre: response.data.nombre,
+            correo: response.data.correo,
+            clave: response.data.clave,
+            icon: response.data.icon,
+            clave_especial: response.data.clave_especial,
+            token: response.data.clave_especial,
+            type: "docente",
+          })
+        );
+        /* window.location.href = "/sesion"; */
+      },
+      onError: (error) => console.log(error),
+    }
+  );
+  function Inicio(correo, clave) {
+    InicioA({ correo, clave });
+    setCorreo("");
+    setClave("");
+  }
   return (
     <div className="w-full min-h-screen flex items-center justify-center">
       <form className="rounded-lg w-full  shadow-xl m-3 p-5 flex flex-col items-center justify-center gap-7  md:w-3/4 lg:w-1/2 xl:w-1/3">
@@ -79,22 +111,22 @@ function Login() {
         ) : (
           <div className="w-full flex flex-col items-center gap-2">
             <input
+              value={correo}
               className={classButton}
               type="email"
-              name=""
-              id=""
               placeholder="Correo electronico"
+              onChange={(e) => setCorreo(e.target.value)}
             />
             <input
+              value={clave}
               className={classButton}
               type="password"
-              name=""
               placeholder="Contraseña"
-              id=""
+              onChange={(e) => setClave(e.target.value)}
             />
             <button
               className={`${classButton} bg-gray-700 px-5 text-white font-hindi text-lg w-1/5`}
-              type="submit"
+              onClick={() => Inicio(correo, clave)}
             >
               Enviar
             </button>

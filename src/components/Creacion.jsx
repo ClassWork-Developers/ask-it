@@ -21,7 +21,7 @@ export default function Creacion() {
             correo: response.data.correo,
             icon: response.data.icon,
             token: response.data.token,
-            type: "user",
+            type: "estudiante",
           })
         );
       },

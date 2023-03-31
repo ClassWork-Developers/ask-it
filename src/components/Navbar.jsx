@@ -53,7 +53,6 @@ export default function Nav() {
         (window.innerHeight || document.documentElement.clientHeight) &&
         usoId.bottom > 0
     );
-    console.log();
   }
   function viewPort(item) {
     switch (item) {
