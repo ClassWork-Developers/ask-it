@@ -1,5 +1,4 @@
 import { Fragment, useState } from "react";
-import { Link } from "react-router-dom";
 import { Listbox, Transition } from "@headlessui/react";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
 import { useAuth0 } from "@auth0/auth0-react";
@@ -47,10 +46,22 @@ function Login() {
     setIcon("");
     setClave_especial("");
   }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(nombre, clave);
+    if (selected.rol == "Estudiante") {
+      loginWithRedirect();
+    } else {
+      register(nombre, correo, clave, icon, clave_especial);
+    }
+  };
   let classButton = "w-full p-3  shadow-lg text-sm rounded-lg";
   return (
     <div className="w-full min-h-screen flex items-center justify-center">
-      <form className="rounded-lg w-full  shadow-xl m-3 p-5 flex flex-col items-center justify-center gap-7 md:w-3/4 lg:w-1/2 xl:w-1/3">
+      <form
+        className="rounded-lg w-full  shadow-xl m-3 p-5 flex flex-col items-center justify-center gap-7 md:w-3/4 lg:w-1/2 xl:w-1/3"
+        onSubmit={handleSubmit}
+      >
         <h1 className="font-hindi text-2xl">Registrarme como...</h1>
         <div className="w-3/4">
           <Listbox value={selected} onChange={setSelected}>
@@ -112,7 +123,7 @@ function Login() {
         {selected.rol == "Estudiante" ? (
           <button
             className="p-3 shadow-lg rounded-lg font-exo bg-gray-700 text-white text-lg"
-            onClick={() => loginWithRedirect()}
+            type="submit"
           >
             Ingresar mis datos
           </button>
@@ -124,6 +135,7 @@ function Login() {
               type="text"
               placeholder="Nombre"
               onChange={(e) => setNombre(e.target.value)}
+              required
             />
             <input
               value={correo}
@@ -131,6 +143,7 @@ function Login() {
               type="email"
               placeholder="Correo electronico"
               onChange={(e) => setCorreo(e.target.value)}
+              required
             />
             <input
               value={clave}
@@ -138,6 +151,7 @@ function Login() {
               type="password"
               placeholder="Contraseña"
               onChange={(e) => setClave(e.target.value)}
+              required
             />
             <input
               value={icon}
@@ -145,6 +159,7 @@ function Login() {
               type="text"
               placeholder="Icono"
               onChange={(e) => setIcon(e.target.value)}
+              required
             />
             <input
               value={clave_especial}
@@ -152,22 +167,18 @@ function Login() {
               type="password"
               placeholder="Ingrese la clave especial de administradores"
               onChange={(e) => setClave_especial(e.target.value)}
+              required
             />
-            <Link to={"/login"}>
-              <button
-                className={`${classButton} bg-gray-700 px-5 text-white font-hindi text-lg w-full`}
-                onClick={() =>
-                  register(nombre, correo, clave, icon, clave_especial)
-                }
-              >
-                Enviar
-              </button>
-            </Link>
+            <button
+              className={`${classButton} bg-gray-700 px-5 text-white font-hindi text-lg w-full`}
+              type="submit"
+            >
+              Enviar
+            </button>
           </div>
         )}
       </form>
     </div>
   );
 }
-
 export default Login;

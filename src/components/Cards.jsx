@@ -111,7 +111,6 @@ function Respuesta({ pregunta, respuestas }) {
               }}
               value={data}
               type="text"
-              name=""
               placeholder="Agregar otra respuesta"
             />
             <button className="p-3 my-5 rounded-lg">
@@ -176,7 +175,7 @@ export default function Card({ text, key }) {
 
   function Selected(response) {
     setQuestionType(response);
-    console.log(key)
+    console.log(key);
   }
   return (
     <>
