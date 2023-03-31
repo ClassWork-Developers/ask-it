@@ -7,11 +7,11 @@ const user = [{ rol: "Estudiante" }, { rol: "Profesor" }];
 function Login() {
   const [selected, setSelected] = useState(user[0]);
   const { loginWithRedirect } = useAuth0();
-  let classButton = 'w-full p-3  shadow-lg text-lg'
+  let classButton = 'w-full p-3  shadow-lg text-sm rounded-lg'
   return (
     <div className="w-full min-h-screen flex items-center justify-center">
-      <form className="rounded-lg w-full  shadow-xl m-3 p-5 flex flex-col items-center justify-center gap-7   ">
-        <h1 className="font-hindi text-2xl">Registro</h1>
+      <form className="rounded-lg w-full  shadow-xl m-3 p-5 flex flex-col items-center justify-center gap-7 md:w-3/4 lg:w-1/2 xl:w-1/3">
+        <h1 className="font-hindi text-2xl">Registrarme como...</h1>
         <div className="w-3/4">
           <Listbox value={selected} onChange={setSelected}>
             <div className="relative mt-1">
@@ -71,20 +71,20 @@ function Login() {
         </div>
         {selected.rol == "Estudiante" ? (
           <button
-            className="p-3 shadow-lg rounded-lg font-exo"
+            className="p-3 shadow-lg rounded-lg font-exo bg-gray-700 text-white text-lg"
             onClick={() => loginWithRedirect()}
           >
-            Presiona para iniciar Sesión o registrarte!
+            Ingresar mis datos
           </button>
         ) : (
-          <div className="w-full flex flex-col gap-2">
+          <div className="w-full flex flex-col items-center gap-2">
             <input className={classButton} type="text" name="" placeholder="Nombre" id=""/>
             <input className={classButton} type="email" name="" id="" placeholder="Correo electronico" />
             <input className={classButton} type="password" name="" placeholder="Contraseña" id="" />
             <input className={classButton} type="text" name="" placeholder="Icono" id="" />
             <input className={classButton} type="text" name="" placeholder="Ingrese la clave especial de administradores" id="" />
             <Link to={'/login'}>
-            <button className={`${classButton} bg-gray-700 rounded-lg text-white font-hindi text-xl`} type="submit">Enviar</button>
+            <button className={`${classButton} bg-gray-700 px-5 text-white font-hindi text-lg w-full`} type="submit">Enviar</button>
             </Link>
           </div>
         )}
