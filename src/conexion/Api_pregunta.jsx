@@ -2,7 +2,7 @@ import { useMutation } from "react-query";
 import axios from "axios";
 import { useState } from "react";
 //DENTRO DE LA FUNCION
-const [nombre, setNombre] = useState("");
+const [pregunta, setPregunta] = useState("");
 const [description, setDescription] = useState("");
 const [tipo_pregunta, setTipo_pregunta] = useState("");
 const [tipo_repuesta, setTipo_repuesta] = useState("");

@@ -172,7 +172,6 @@ export default function Card({ text, key }) {
       respuestas: [],
     },
   ]);
-
   function Selected(response) {
     setQuestionType(response);
     console.log(key);
