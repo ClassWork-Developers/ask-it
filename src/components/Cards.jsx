@@ -2,6 +2,10 @@ import { Popover, Transition } from "@headlessui/react";
 import { PlusCircleIcon, MinusCircleIcon } from "@heroicons/react/20/solid";
 import {
   PlusIcon,
+  ClipboardDocumentIcon,
+  TrashIcon,
+  BarsArrowDownIcon,
+  CheckCircleIcon,
 } from "@heroicons/react/20/solid";
 import { useState } from "react";
 import { useMutation } from "react-query";
@@ -156,10 +160,11 @@ function Respuesta({ pregunta, respuestas }) {
   // }
 }
 export default function Card({ text, key }) {
+  const [show, setShow] = useState("hidden");
   const [tpreSeleccionado, setTpreSeleccionado] = useState(0);
   const [questionType, setQuestionType] = useState("Texto");
-  
-	const [nextId, aggnextId] = useState(2);
+
+  const [nextId, aggnextId] = useState(2);
   let User = JSON.parse(localStorage.getItem("currentUser"));
   let config = {
     headers: {
@@ -167,8 +172,7 @@ export default function Card({ text, key }) {
       "Content-Type": "multipart/form-data",
     },
   };
-  const [preguntas, aggPregunta] = useState([{id: 1, pregunta: ""},
-  ]);
+  const [preguntas, aggPregunta] = useState([{ id: 1, pregunta: "" }]);
   //Crear preguntas
   const { mutate: Preguntas } = useMutation(
     (data) => axios.post("http://localhost:3000/CrearPregunta", data, config),
@@ -191,10 +195,59 @@ export default function Card({ text, key }) {
     setQuestionType(response);
     console.log(key);
   }
+  const Show = () => {
+    show == "hidden" ? setShow("flex") : setShow("hidden");
+  };
   return (
     <>
+      <ul className="bg-gray-300 p-5 w-1/2 mx-auto rounded-lg text-xl m-3 cursor-pointer">
+        <li>
+          <h3
+            className="flex items-center justify-between"
+            onClick={() => Show()}
+          >
+            Sugerencias de preguntas
+            <BarsArrowDownIcon className="h-6 w-6" />
+          </h3>
+        </li>
+        <li
+          className={`${show} justify-between pt-7 pb-3 border-b-2 border-gray-400`}
+          onClick={(e) => {
+            Agregar(e.target.textContent);
+          }}
+        >
+          como salirse de la carrera? <CheckCircleIcon className="h-6 w-6" />
+        </li>
+        <li
+          className={`${show} justify-between pt-7 pb-3 border-b-2 border-gray-400`}
+          onClick={(e) => {
+            Agregar(e.target.textContent);
+          }}
+        >
+          como salirse de la carrera? <CheckCircleIcon className="h-6 w-6" />
+        </li>
+      </ul>
       {preguntas.map((pre, preIndex) => (
         <div className="w-full" key={preIndex}>
+          <div className="w-full flex justify-end">
+              {/* Duplicar pregunta */}
+              <button className="mt-1 p-1 px-2">
+                <ClipboardDocumentIcon
+                  className="block h-6 w-6"
+                  aria-hidden="true"
+                />
+              </button>
+              {/* Eliminar pregunta */}
+              <button
+                className="mt-1 p-1 px-2"
+                onClick={() => {
+                  setCards(cards.filter((x) => x.id !== pregunta.id));
+                }}
+              >
+                <TrashIcon className="block h-6 w-6" aria-hidden="true" />
+                {/* {pregunta.id} */}
+              </button>
+            </div>
           {/* card */}
           <div className="bg-zinc-100 p-5 my-3 mt-1 rounded-md">
             <header className="w-full">
@@ -213,7 +266,7 @@ export default function Card({ text, key }) {
                         preguntas.map((pregunta) => {
                           if (pregunta.id == pre.id) {
                             console.log(preguntas);
-                            return { ...pregunta, pregunta: e.target.value};
+                            return { ...pregunta, pregunta: e.target.value };
                           } else {
                             return pregunta;
                           }
@@ -273,7 +326,10 @@ export default function Card({ text, key }) {
       ))}
       <button
         className="m-4 bg-gray-700 text-white p-3 cursor-pointer rounded-lg"
-        onClick={() => {aggPregunta([...preguntas, { id: nextId, pregunta: ''}]); aggnextId(nextId+1)}}
+        onClick={() => {
+          aggPregunta([...preguntas, { id: nextId, pregunta: "" }]);
+          aggnextId(nextId + 1);
+        }}
       >
         <PlusIcon className="inline mr-3 h-6 w-6" />
         Agregar pregunta

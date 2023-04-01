@@ -12,7 +12,6 @@ export default function Edicion() {
   const GetId = () => {
     return Math.floor(Math.random() * 1000);
   };
-  const [show, setShow] = useState("hidden");
   const [cards, setCards] = useState([{ id: GetId(), card: <Card key={0} /> }]);
 
   const [nombre, setNombre] = useState("");
@@ -46,10 +45,6 @@ export default function Edicion() {
   const handleSubmit = () => {
     Add_encuesta(nombre, periodo /* description, */);
     /* Add_pregunta(pregunta); */
-  };
-
-  const Show = () => {
-    show == "hidden" ? setShow("flex") : setShow("hidden");
   };
   let user = JSON.parse(localStorage.getItem("currentUser"));
   return (
@@ -100,58 +95,8 @@ export default function Edicion() {
           </figure>
         </div>
       </section>
-      <ul className="bg-gray-300 p-5 w-1/2 mx-auto rounded-lg text-xl m-3 cursor-pointer">
-        <li>
-          <h3
-            className="flex items-center justify-between"
-            onClick={() => Show()}
-          >
-            Sugerencias de preguntas
-            <BarsArrowDownIcon className="h-6 w-6" />
-          </h3>
-        </li>
-        <li
-          className={`${show} justify-between pt-7 pb-3 border-b-2 border-gray-400`}
-          onClick={(e) => {
-            Agregar(e.target.textContent);
-          }}
-        >
-          como salirse de la carrera? <CheckCircleIcon className="h-6 w-6" />
-        </li>
-        <li
-          className={`${show} justify-between pt-7 pb-3 border-b-2 border-gray-400`}
-          onClick={(e) => {
-            Agregar(e.target.textContent);
-          }}
-        >
-          como salirse de la carrera? <CheckCircleIcon className="h-6 w-6" />
-        </li>
-      </ul>
       <div className="flex flex-col items-center">
-        {cards.map((pregunta, index) => (
-          <div className="w-1/2 flex flex-col items-center" key="index">
-            <div className="w-full flex justify-end">
-              {/* Duplicar pregunta */}
-              <button className="mt-1 p-1 px-2">
-                <ClipboardDocumentIcon
-                  className="block h-6 w-6"
-                  aria-hidden="true"
-                />
-              </button>
-              {/* Eliminar pregunta */}
-              <button
-                className="mt-1 p-1 px-2"
-                onClick={() => {
-                  setCards(cards.filter((x) => x.id !== pregunta.id));
-                }}
-              >
-                <TrashIcon className="block h-6 w-6" aria-hidden="true" />
-                {/* {pregunta.id} */}
-              </button>
-            </div>
-            {pregunta.card}
-          </div>
-        ))}
+        <Card/>
       </div>
       <div>
         <button
