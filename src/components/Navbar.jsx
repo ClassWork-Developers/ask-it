@@ -3,7 +3,11 @@ import { Outlet, Link } from "react-router-dom";
 import { Link as LinkScroll } from "react-scroll";
 import { Fragment, useState } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
-import { Bars3Icon, XMarkIcon, ArrowLeftOnRectangleIcon } from "@heroicons/react/24/outline";
+import {
+  Bars3Icon,
+  XMarkIcon,
+  ArrowLeftOnRectangleIcon,
+} from "@heroicons/react/24/outline";
 import { useAuth0 } from "@auth0/auth0-react";
 import { navigation, userNavigation } from "../assets/constantes";
 
@@ -49,7 +53,6 @@ export default function Nav() {
         (window.innerHeight || document.documentElement.clientHeight) &&
         usoId.bottom > 0
     );
-    console.log();
   }
   function viewPort(item) {
     switch (item) {
@@ -115,11 +118,11 @@ export default function Nav() {
                         </LinkScroll>
                       ))}
                       {!isAuthenticated && (
-                        <Link to={'/login'}>
-                        <p className="flex gap-2 items-center text-right rounded-md px-3 py-2 text-sm font-medium cursor-pointer text-gray-800 hover:bg-gray-700 hover:text-white">
-                          Iniciar Sesión
-                          <ArrowLeftOnRectangleIcon className='h-6 w-6' />
-                        </p>
+                        <Link to={"/login"}>
+                          <p className="flex gap-2 items-center text-right rounded-md px-3 py-2 text-sm font-medium cursor-pointer text-gray-800 hover:bg-gray-700 hover:text-white">
+                            Iniciar Sesión
+                            <ArrowLeftOnRectangleIcon className="h-6 w-6" />
+                          </p>
                         </Link>
                       )}
                     </div>
@@ -167,6 +170,7 @@ export default function Nav() {
                           <p
                             onClick={() => {
                               logout();
+                              localStorage.removeItem("currentUser");
                             }}
                             className={
                               "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
@@ -212,13 +216,11 @@ export default function Nav() {
                   </Disclosure.Button>
                 ))}
                 {!isAuthenticated && (
-                  <Link to={'/login'}>
-                  <h1
-                    className="flex gap-2 items-center text-right rounded-md px-3 py-2 text-base font-medium text-gray-800 hover:bg-gray-700 hover:text-white cursor-pointer"
-                  >
-                    Iniciar Sesión
-                    <ArrowLeftOnRectangleIcon className='w-6 h-6'/>
-                  </h1>
+                  <Link to={"/login"}>
+                    <h1 className="flex gap-2 items-center text-right rounded-md px-3 py-2 text-base font-medium text-gray-800 hover:bg-gray-700 hover:text-white cursor-pointer">
+                      Iniciar Sesión
+                      <ArrowLeftOnRectangleIcon className="w-6 h-6" />
+                    </h1>
                   </Link>
                 )}
               </div>
@@ -255,6 +257,7 @@ export default function Nav() {
                     <p
                       onClick={() => {
                         logout();
+                        localStorage.removeItem("currentUser");
                       }}
                       className={
                         "block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white cursor-pointer"
