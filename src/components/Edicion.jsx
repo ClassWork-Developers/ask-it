@@ -4,7 +4,6 @@ import {
   TrashIcon,
   BarsArrowDownIcon,
   CheckCircleIcon,
-  PlusIcon,
 } from "@heroicons/react/20/solid";
 import Card from "./Cards";
 import { useMutation } from "react-query";
@@ -47,11 +46,6 @@ export default function Edicion() {
   const handleSubmit = () => {
     Add_encuesta(nombre, periodo /* description, */);
     /* Add_pregunta(pregunta); */
-  };
-  const Agregar = (text) => {
-    text
-      ? setCards([...cards, { id: GetId(), card: <Card text={text} /> }])
-      : setCards([...cards, { id: GetId(), card: <Card /> }]);
   };
 
   const Show = () => {
@@ -159,15 +153,6 @@ export default function Edicion() {
           </div>
         ))}
       </div>
-      <button
-        className="m-4 bg-gray-700 text-white p-3 cursor-pointer rounded-lg"
-        onClick={() => {
-          Agregar();
-        }}
-      >
-        <PlusIcon className="inline mr-3 h-6 w-6" />
-        Agregar pregunta
-      </button>
       <div>
         <button
           className="p-3 my-5  bg-gray-900 text-white rounded-lg"

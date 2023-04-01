@@ -1,5 +1,8 @@
 import { Popover, Transition } from "@headlessui/react";
 import { PlusCircleIcon, MinusCircleIcon } from "@heroicons/react/20/solid";
+import {
+  PlusIcon,
+} from "@heroicons/react/20/solid";
 import { useState } from "react";
 import { useMutation } from "react-query";
 import axios from "axios";
@@ -155,6 +158,8 @@ function Respuesta({ pregunta, respuestas }) {
 export default function Card({ text, key }) {
   const [tpreSeleccionado, setTpreSeleccionado] = useState(0);
   const [questionType, setQuestionType] = useState("Texto");
+  
+	const [nextId, aggnextId] = useState(2);
   let User = JSON.parse(localStorage.getItem("currentUser"));
   let config = {
     headers: {
@@ -162,14 +167,7 @@ export default function Card({ text, key }) {
       "Content-Type": "multipart/form-data",
     },
   };
-  const [preguntas, setPreguntas] = useState([
-    {
-      id: 1,
-      pregunta: "",
-      descripcion: "Agrega una descripción",
-      tipo: questionType,
-      respuestas: [],
-    },
+  const [preguntas, aggPregunta] = useState([{id: 1, pregunta: ""},
   ]);
   //Crear preguntas
   const { mutate: Preguntas } = useMutation(
@@ -206,16 +204,16 @@ export default function Card({ text, key }) {
                 </p>
                 <div className="mt-2 grow">
                   <input
-                    id="pregunta"
+                    id={pre.id}
                     className="block w-full p-3 h-9 ml-3 rounded-md border-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:py-1.5 sm:text-sm sm:leading-6"
-                    defaultValue={pre.pregunta}
                     placeholder="Define tu pregunta"
+                    defaultValue={pre.pregunta}
                     onChange={(e) =>
-                      setPreguntas(
+                      aggPregunta(
                         preguntas.map((pregunta) => {
                           if (pregunta.id == pre.id) {
                             console.log(preguntas);
-                            return { ...pregunta, nombre: e.target.value };
+                            return { ...pregunta, pregunta: e.target.value};
                           } else {
                             return pregunta;
                           }
@@ -273,6 +271,13 @@ export default function Card({ text, key }) {
           </div>
         </div>
       ))}
+      <button
+        className="m-4 bg-gray-700 text-white p-3 cursor-pointer rounded-lg"
+        onClick={() => {aggPregunta([...preguntas, { id: nextId, pregunta: ''}]); aggnextId(nextId+1)}}
+      >
+        <PlusIcon className="inline mr-3 h-6 w-6" />
+        Agregar pregunta
+      </button>
     </>
   );
 }
