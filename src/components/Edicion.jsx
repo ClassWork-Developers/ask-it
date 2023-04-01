@@ -79,6 +79,7 @@ export default function Edicion() {
   const Show = () => {
     show == "hidden" ? setShow("flex") : setShow("hidden");
   };
+  let user = JSON.parse(localStorage.getItem("currentUser"));
   return (
     <>
       <section className="relative isolate overflow-hidden bg-zinc-200 py-6 px-6 lg:px-8 rounded-md">
@@ -87,11 +88,11 @@ export default function Edicion() {
             <figcaption>
               <img
                 className="mx-auto h-10 w-10 rounded-full"
-                src={User.icon}
+                src={user.icon}
                 alt=""
               />
               <p className="font-semibold text-gray-900 text-center py-2">
-                {User.nombre}
+                {user.nombre}
               </p>
             </figcaption>
             <blockquote className="grid grid-cols-2 gap-x-3 text-center text-xl font-semibold leading-8 text-gray-900 sm:text-2xl sm:leading-9">
@@ -127,7 +128,7 @@ export default function Edicion() {
           </figure>
         </div>
       </section>
-      <ul className="bg-gray-300 p-5 rounded-lg text-xl m-3 cursor-pointer">
+      <ul className="bg-gray-300 p-5 w-1/2 mx-auto rounded-lg text-xl m-3 cursor-pointer">
         <li>
           <h3
             className="flex items-center justify-between"
@@ -159,7 +160,7 @@ export default function Edicion() {
           <div className="w-1/2 flex flex-col items-center" key="index">
             <div className="w-full flex justify-end">
               {/* Duplicar pregunta */}
-              <button className="m-1 p-1 px-2">
+              <button className="mt-1 p-1 px-2">
                 <ClipboardDocumentIcon
                   className="block h-6 w-6"
                   aria-hidden="true"
@@ -167,7 +168,7 @@ export default function Edicion() {
               </button>
               {/* Eliminar pregunta */}
               <button
-                className="m-1 p-1 px-2"
+                className="mt-1 p-1 px-2"
                 onClick={() => {
                   setCards(cards.filter((x) => x.id !== pregunta.id));
                 }}
@@ -196,6 +197,7 @@ export default function Edicion() {
             handleSubmit();
           }}
         >
+          <CheckCircleIcon className="inline mr-3 h-6 w-6" />
           Guardar Formulario
         </button>
       </div>

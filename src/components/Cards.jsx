@@ -163,7 +163,7 @@ export default function Card({ text, key }) {
   };
   const [preguntas, setPreguntas] = useState([
     {
-      pregunta: "Define tu pregunta",
+      pregunta: "",
       descripcion: "Agrega una descripción",
       tipo: questionType,
       respuestas: [],
@@ -176,40 +176,26 @@ export default function Card({ text, key }) {
   }
   return (
     <>
-      {preguntas.map((pregunta, preIndex) => (
-        <div className="w-full mx-auto" key={preIndex}>
+      {preguntas.map((pre, preIndex) => (
+        <div className="w-full" key={preIndex}>
           {/* card */}
-          <div className="bg-zinc-100 p-5 my-3">
+          <div className="bg-zinc-100 p-5 my-3 mt-1 rounded-md">
             <header className="w-full">
               <div className="flex">
                 <p className="mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">
                   Pregunta:
                 </p>
                 <div className="mt-2 grow">
-                  <textarea
-                    value={text ? text : null}
+                  <input
                     id="pregunta"
-                    name="about"
-                    rows={3}
                     className="block w-full p-3 h-9 ml-3 rounded-md border-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:py-1.5 sm:text-sm sm:leading-6"
-                    defaultValue=""
+                    defaultValue={pre.pregunta}
+                    placeholder="Define tu pregunta"
                   />
                 </div>
               </div>
-              <div className="flex">
-                <p className="mt-5 text-sm leading-6 text-gray-600 line-clamp-3">
-                  Description (Opcional)
-                </p>
-                <div className="mt-2 grow">
-                  <textarea
-                    id="pregunta"
-                    name="about"
-                    rows={3}
-                    className="block w-full p-3 h-9 ml-3 rounded-md border-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:py-1.5 sm:text-sm sm:leading-6"
-                    defaultValue=""
-                  />
-                </div>
-              </div>
+            </header>
+            <div className="max-w-lg mx-auto">
               {/* <div className="flex justify-start my-2">
                 <p className="w-full mt-5 text-sm leading-6 text-gray-600 line-clamp-3">
                   Seleccione el tipo de respuesta:{" "}
@@ -229,20 +215,25 @@ export default function Card({ text, key }) {
                   <option value="Seleccion multiple">Seleccion multiple</option>
                 </select>
               </div> */}
-            </header>
-            <div className="max-w-lg mx-auto">
-              <fieldset>
-                <div className="mt-2">
-                  <textarea
-                    disabled
-                    id="about"
-                    name="about"
-                    rows={3}
-                    className="block w-full rounded-md border-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:py-1.5 sm:text-sm sm:leading-6"
-                    defaultValue={""}
-                  />
-                </div>
-              </fieldset>
+              <div className="mt-2">
+                <textarea
+                  id="descripcion"
+                  rows={3}
+                  className="block w-full p-3 h-9 ml-3 rounded-md border-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:py-1.5 sm:text-sm sm:leading-6"
+                  defaultValue={pre.descripcion}
+                  placeholder="Descripción (Opcional)"
+                />
+              </div>
+              <div className="mt-2">
+                <textarea
+                  disabled
+                  id="respuesta"
+                  rows={3}
+                  className="block w-full p-3 h-9 ml-3 rounded-md border-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:py-1.5 sm:text-sm sm:leading-6"
+                  defaultValue={""}
+                  placeholder="Plasma tu respuesta"
+                />
+              </div>
               {/* <Respuesta
                 pregunta={questionType}
                 respuestas={pregunta.respuestas}
