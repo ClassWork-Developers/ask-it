@@ -154,6 +154,13 @@ function Respuesta({ pregunta, respuestas }) {
 export default function Card({ text, key }) {
   const [tpreSeleccionado, setTpreSeleccionado] = useState(0);
   const [questionType, setQuestionType] = useState("Texto");
+  let User = JSON.parse(localStorage.getItem("currentUser"));
+  let config = {
+    headers: {
+      Authorization: `Bearer ${User.token}`,
+      "Content-Type": "multipart/form-data",
+    },
+  };
   const [preguntas, setPreguntas] = useState([
     {
       pregunta: "Define tu pregunta",
