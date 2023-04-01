@@ -24,7 +24,6 @@ export default function Edicion() {
   let config = {
     headers: {
       Authorization: `Bearer ${User.token}`,
-      "Content-Type": "multipart/form-data",
     },
   };
   //Crear encuesta
@@ -35,20 +34,15 @@ export default function Edicion() {
         console.log(response.data);
         console.log(nombre);
         let id_encuesta = response.data.id;
+				setNombre("");
+				setPeriodo("");
+				setDescription("");
       },
       onError: (err) => console.log(err),
     }
   );
   function Add_encuesta(nombre, periodo /* description, */) {
-    Encuestas({
-      nombre,
-      /* description, */
-      periodo,
-      open: true,
-    });
-    setNombre("");
-    setPeriodo("");
-    setDescription("");
+    Encuestas({ nombre, periodo });
   }
   const handleSubmit = () => {
     Add_encuesta(nombre, periodo /* description, */);

@@ -29,6 +29,8 @@ function Login() {
             type: "docente",
           })
         );
+        setCorreo("");
+        setClave("");
         window.location.href = "/sesion";
       },
       onError: (error) => console.log(error),
@@ -36,8 +38,6 @@ function Login() {
   );
   function Inicio(correo, clave) {
     InicioA({ correo, clave });
-    setCorreo("");
-    setClave("");
   }
   return (
     <div className="w-full min-h-screen flex items-center justify-center">

@@ -33,6 +33,11 @@ function Login() {
             type: "docente",
           })
         );
+        setNombre("");
+        setCorreo("");
+        setClave("");
+        setIcon("");
+        setClave_especial("");
         window.location.href = "/sesion";
       },
       onError: (error) => console.log(error),
@@ -40,11 +45,6 @@ function Login() {
   );
   function register(nombre, correo, clave, icon, clave_especial) {
     RegisterA({ nombre, correo, clave, icon, clave_especial });
-    setNombre("");
-    setCorreo("");
-    setClave("");
-    setIcon("");
-    setClave_especial("");
   }
   const handleSubmit = (e) => {
     e.preventDefault();
