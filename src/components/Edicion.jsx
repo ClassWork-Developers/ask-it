@@ -13,16 +13,17 @@ export default function Edicion() {
 	};
 	const [show, setShow] = useState('hidden');
 	const [cards, setCards] = useState([{ id: GetId(), card: <Card key={0} /> }]);
-
+	
 	const Agregar = (text) => {
 		text
-			? setCards([...cards, { id: GetId(), card: <Card text={text} /> }])
-			: setCards([...cards, { id: GetId(), card: <Card /> }]);
+		? setCards([...cards, { id: GetId(), card: <Card text={text} /> }])
+		: setCards([...cards, { id: GetId(), card: <Card /> }]);
 	};
-
+	
 	const Show = () => {
 		show == 'hidden' ? setShow('flex') : setShow('hidden');
 	};
+	let User = JSON.parse(localStorage.getItem("currentUser"));
 	return (
 		<>
 			<section className="relative isolate overflow-hidden bg-zinc-200 py-6 px-6 lg:px-8 rounded-md">
@@ -31,28 +32,35 @@ export default function Edicion() {
 						<figcaption>
 							<img
 								className="mx-auto h-10 w-10 rounded-full"
-								src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+								src={User.icon}
 								alt=""
 							/>
-							<p className="font-semibold text-gray-900 text-center py-2">Judith Black</p>
+							<p className="font-semibold text-gray-900 text-center py-2">{User.nombre}</p>
 						</figcaption>
-						<blockquote className="text-center text-xl font-semibold leading-8 text-gray-900 sm:text-2xl sm:leading-9">
-							<div className="mt-2">
-								<textarea
-									id="about"
-									name="about"
-									rows={3}
+						<blockquote className="grid grid-cols-2 gap-x-3 text-center text-xl font-semibold leading-8 text-gray-900 sm:text-2xl sm:leading-9">
+							<div className="mt-2 col-span-1">
+								<input
+									id="tittle"
 									className="block w-full h-9 p-3 rounded-md border-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:py-1.5 sm:text-sm sm:leading-6"
-									defaultValue="Titulo del formulario"
-								/>
+									defaultValue=""
+									placeholder='Titulo del formulario'
+									/>
 							</div>
-							<div className="mt-2">
+							<div className="mt-2 col-span1">
+								<input
+									id="periodo"
+									className="block w-full h-9 p-3 rounded-md border-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:py-1.5 sm:text-sm sm:leading-6"
+									defaultValue=""
+									placeholder='Periodo'
+									/>
+							</div>
+							<div className="mt-2 col-span-2">
 								<textarea
 									id="about"
-									name="about"
 									rows={3}
 									className="block w-full p-3 rounded-md border-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:py-1.5 sm:text-sm sm:leading-6"
-									defaultValue="Descripción opcional"
+									defaultValue=""
+									placeholder="Descripción opcional"
 								/>
 							</div>
 						</blockquote>
@@ -116,7 +124,6 @@ export default function Edicion() {
 				Agregar pregunta
 			</button>
 			<div>
-				<button className="p-3 my-5 rounded-lg">Agregar pregunta</button>
 				<button className="p-3 my-5  bg-gray-900 text-white rounded-lg">
 					Guardar Formulario
 				</button>
