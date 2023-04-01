@@ -30,7 +30,7 @@ export default function UndefinedPath() {
             isAuthenticated ? logout() : (window.location.href = "/");
           }}
         >
-          aqui
+          aquí
         </strong>
       </p>
     </div>
