@@ -19,7 +19,7 @@ export default function Edicion() {
   const [nombre, setNombre] = useState("");
   const [periodo, setPeriodo] = useState("");
   const [description, setDescription] = useState("");
-  const [pregunta, setPregunta] = useState("");
+
   let User = JSON.parse(localStorage.getItem("currentUser"));
   let config = {
     headers: {
@@ -33,6 +33,7 @@ export default function Edicion() {
     {
       onSuccess: (response) => {
         console.log(response.data);
+        console.log(nombre);
         let id_encuesta = response.data.id;
       },
       onError: (err) => console.log(err),
@@ -48,23 +49,6 @@ export default function Edicion() {
     setNombre("");
     setPeriodo("");
     setDescription("");
-  }
-  //Crear preguntas
-  const { mutate: Preguntas } = useMutation(
-    (data) => axios.post("http://localhost:3000/CrearPregunta", data, config),
-    {
-      onSuccess: (response) => {
-        console.log(response.data);
-      },
-      onError: (err) => console.log(err),
-    }
-  );
-  function Add_pregunta(pregunta /* id_encuesta */) {
-    Preguntas({
-      pregunta,
-      id_encuesta: 4,
-    });
-    setPregunta("");
   }
   const handleSubmit = () => {
     Add_encuesta(nombre, periodo /* description, */);

@@ -1,7 +1,8 @@
 import { Popover, Transition } from "@headlessui/react";
 import { PlusCircleIcon, MinusCircleIcon } from "@heroicons/react/20/solid";
 import { useState } from "react";
-
+import { useMutation } from "react-query";
+import axios from "axios";
 function Respuesta({ pregunta, respuestas }) {
   // const [AgregarCheckbox, setAgregarCheckbox] = useState([]);
   // const [AgregarRadio, setAgregarRadio] = useState([]);
@@ -163,12 +164,30 @@ export default function Card({ text, key }) {
   };
   const [preguntas, setPreguntas] = useState([
     {
+      id: 1,
       pregunta: "",
       descripcion: "Agrega una descripción",
       tipo: questionType,
       respuestas: [],
     },
   ]);
+  //Crear preguntas
+  const { mutate: Preguntas } = useMutation(
+    (data) => axios.post("http://localhost:3000/CrearPregunta", data, config),
+    {
+      onSuccess: (response) => {
+        console.log(response.data);
+      },
+      onError: (err) => console.log(err),
+    }
+  );
+  function Add_pregunta(preguntas /* id_encuesta */) {
+    Preguntas({
+      pregunta,
+      id_encuesta: 4,
+    });
+    setPregunta("");
+  }
 
   function Selected(response) {
     setQuestionType(response);
@@ -191,6 +210,18 @@ export default function Card({ text, key }) {
                     className="block w-full p-3 h-9 ml-3 rounded-md border-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:py-1.5 sm:text-sm sm:leading-6"
                     defaultValue={pre.pregunta}
                     placeholder="Define tu pregunta"
+                    onChange={(e) =>
+                      setPreguntas(
+                        preguntas.map((pregunta) => {
+                          if (pregunta.id == pre.id) {
+                            console.log(preguntas);
+                            return { ...pregunta, nombre: e.target.value };
+                          } else {
+                            return pregunta;
+                          }
+                        })
+                      )
+                    }
                   />
                 </div>
               </div>
