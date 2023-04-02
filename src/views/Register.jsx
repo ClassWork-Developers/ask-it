@@ -20,41 +20,34 @@ function Login() {
   const [clave_especial, setClave_especial] = useState('');
 
   //Conexion con la API
-  const { mutate: RegisterA } = useMutation((data) => axios.post('http://localhost:3000/CrearAdmin', data), {
-    onSuccess: (response) => {
-      console.log(response.data);
-      localStorage.setItem(
-        'currentUser',
-        JSON.stringify({
-          nombre: response.data.nombre,
-          token: response.data.token,
-          status: response.data.status,
-          icon: response.data.icon,
-          id: response.data.id,
-          type: 'docente',
-        })
-      );
-      window.location.href = '/sesion';
-    },
-    onError: (error) => {
-      Swal.fire({
-        position: 'center',
-        icon: 'error',
-        title: error.response.data.msg,
-        showConfirmButton: false,
-        timer: 1200,
-      });
-      console.log(error);
-    },
-  });
-
+  const { mutate: RegisterA } = useMutation(
+    (data) => axios.post("http://localhost:3000/CrearAdmin", data),
+    {
+      onSuccess: (response) => {
+        console.log(response.data);
+        localStorage.setItem(
+          "currentUser",
+          JSON.stringify({
+            nombre: response.data.nombre,
+            token: response.data.token,
+            status: response.data.status,
+            icon: response.data.icon,
+            id: response.data.id,
+            type: "docente",
+          })
+        );
+        setNombre("");
+        setCorreo("");
+        setClave("");
+        setIcon("");
+        setClave_especial("");
+        window.location.href = "/sesion";
+      },
+      onError: (error) => console.log(error),
+    }
+  );
   function register(nombre, correo, clave, icon, clave_especial) {
     RegisterA({ nombre, correo, clave, icon, clave_especial });
-    setNombre('');
-    setCorreo('');
-    setClave('');
-    setIcon('');
-    setClave_especial('');
   }
 
   const handleSubmit = (e) => {

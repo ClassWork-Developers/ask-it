@@ -7,12 +7,18 @@ let config = {
     "Content-Type": "multipart/form-data",
   },
 };
-const { data, isLoading, error } = useQuery(
-  (data) => axios.get("http://localhost:3000/MostrarPreguntas", data, config),
-  {
-    onSuccess: (response) => {
-      console.log(response.data);
-    },
-    onError: (err) => console.log(err),
-  }
-);
+//funcion
+const query = useQuery("Preguntas", async () => {
+  const { data } = await axios(
+    "http://localhost:3000/MostrarPreguntas",
+    config
+  );
+  return data;
+  /* {
+      onSuccess: (response) => {
+        console.log(response.data);
+      },
+      onError: (err) => console.log(err),
+    }; */
+});
+query.data.map((a) => console.log(a.pregunta));
