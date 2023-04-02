@@ -9,15 +9,27 @@ import Card from "./Cards";
 import { useMutation } from "react-query";
 import axios from "axios";
 export default function Edicion() {
-  const GetId = () => {
-    return Math.floor(Math.random() * 1000);
-  };
-  const [cards, setCards] = useState([{ id: GetId(), card: <Card key={0} /> }]);
-
+  const [array_preguntas, setPreguntas] = useState([]);
+  const [relaciones, setRelaciones] = useState([]);
   const [nombre, setNombre] = useState("");
   const [periodo, setPeriodo] = useState("");
   const [description, setDescription] = useState("");
-
+	function PreguntasForm(data) {
+    console.log(data)
+    let pregNew = []
+    let pregList = []
+    for (const pre in data) {
+      console.log(pre.list);
+      if (data[pre].list == false) {
+        pregNew.push(data[pre])
+      } else {
+        pregList.push(data[pre])
+      }
+    }
+    setPreguntas(pregNew)
+    setRelaciones(pregList)
+	}
+  let id_encuesta = '';
   let User = JSON.parse(localStorage.getItem("currentUser"));
   let config = {
     headers: {
@@ -31,10 +43,20 @@ export default function Edicion() {
       onSuccess: (response) => {
         console.log(response.data);
         console.log(nombre);
-        let id_encuesta = response.data.id;
+        id_encuesta = response.data.id;
+        Preguntas({ id_encuesta, array_preguntas})
 				setNombre("");
 				setPeriodo("");
 				setDescription("");
+      },
+      onError: (err) => console.log(err),
+    }
+  );
+  const { mutate: Preguntas } = useMutation(
+    (data) => axios.post("http://localhost:3000/CrearPregunta", data, config),
+    {
+      onSuccess: (response) => {
+        console.log(response.data);
       },
       onError: (err) => console.log(err),
     }
@@ -96,7 +118,7 @@ export default function Edicion() {
         </div>
       </section>
       <div className="flex flex-col items-center">
-        <Card/>
+        <Card form={PreguntasForm}/>
       </div>
       <div>
         <button

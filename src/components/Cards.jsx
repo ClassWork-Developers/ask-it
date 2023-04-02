@@ -7,16 +7,16 @@ import {
   BarsArrowDownIcon,
   CheckCircleIcon,
 } from "@heroicons/react/20/solid";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useMutation } from "react-query";
 import axios from "axios";
-function Respuesta({ pregunta, respuestas }) {
+// function Respuesta({ pregunta, respuestas }) {
   // const [AgregarCheckbox, setAgregarCheckbox] = useState([]);
   // const [AgregarRadio, setAgregarRadio] = useState([]);
-  const [data, setData] = useState("");
-  function updateData(data) {
-    setData(data);
-  }
+  // const [data, setData] = useState("");
+  // function updateData(data) {
+  //   setData(data);
+  // }
   // function PreguntaCerrada(e) {
   //   e.preventDefault();
   //   if (pregunta == "Seleccion multiple") {
@@ -158,8 +158,8 @@ function Respuesta({ pregunta, respuestas }) {
   //       </fieldset>
   //     );
   // }
-}
-export default function Card({ text, key }) {
+// }
+export default function Card({ form }) {
   const [show, setShow] = useState("hidden");
   const [tpreSeleccionado, setTpreSeleccionado] = useState(0);
   const [questionType, setQuestionType] = useState("Texto");
@@ -172,29 +172,20 @@ export default function Card({ text, key }) {
       "Content-Type": "multipart/form-data",
     },
   };
-  const [preguntas, aggPregunta] = useState([{ id: 1, pregunta: "" }]);
-  //Crear preguntas
-  const { mutate: Preguntas } = useMutation(
-    (data) => axios.post("http://localhost:3000/CrearPregunta", data, config),
+  const [select, setSelect] = useState([]);
+  const [preguntas, aggPregunta] = useState([{ id: 1, pregunta: "", list: false }]);
+  const { mutate: PreguntasList } = useMutation(
+    (data) => axios.get("http://localhost:3000/MostrarPreguntas"),
     {
       onSuccess: (response) => {
-        console.log(response.data);
+        setSelect(response.data);
       },
       onError: (err) => console.log(err),
     }
   );
-  function Add_pregunta(preguntas /* id_encuesta */) {
-    Preguntas({
-      pregunta,
-      id_encuesta: 4,
-    });
-    setPregunta("");
-  }
-
-  function Selected(response) {
-    setQuestionType(response);
-    console.log(key);
-  }
+  useEffect(() => {
+		PreguntasList()
+	}, [])
   const Show = () => {
     show == "hidden" ? setShow("flex") : setShow("hidden");
   };
@@ -210,28 +201,31 @@ export default function Card({ text, key }) {
             <BarsArrowDownIcon className="h-6 w-6" />
           </h3>
         </li>
-        <li
-          className={`${show} justify-between pt-7 pb-3 border-b-2 border-gray-400`}
-          onClick={(e) => {
-            Agregar(e.target.textContent);
-          }}
-        >
-          como salirse de la carrera? <CheckCircleIcon className="h-6 w-6" />
-        </li>
-        <li
-          className={`${show} justify-between pt-7 pb-3 border-b-2 border-gray-400`}
-          onClick={(e) => {
-            Agregar(e.target.textContent);
-          }}
-        >
-          como salirse de la carrera? <CheckCircleIcon className="h-6 w-6" />
-        </li>
+        {select.map((pre, preI) => (
+          <li
+            className={`${show} justify-between pt-7 pb-3 border-b-2 border-gray-400`}
+            key={preI}
+            onClick={() => {
+              aggPregunta([...preguntas, { id: pre._id, pregunta: pre.pregunta, list: true }]);
+              form(preguntas);
+            }}
+          >
+            {pre.pregunta} <CheckCircleIcon className="h-6 w-6" />
+          </li>
+        ))}
       </ul>
       {preguntas.map((pre, preIndex) => (
         <div className="w-full" key={preIndex}>
           <div className="w-full flex justify-end">
               {/* Duplicar pregunta */}
-              <button className="mt-1 p-1 px-2">
+              <button 
+                className="mt-1 p-1 px-2"
+                onClick={() => {
+                  aggPregunta([...preguntas, { id: nextId, pregunta: pre.pregunta, list: false}]);
+                  aggnextId(nextId + 1);
+                  form(preguntas);
+                }}
+              >
                 <ClipboardDocumentIcon
                   className="block h-6 w-6"
                   aria-hidden="true"
@@ -241,7 +235,9 @@ export default function Card({ text, key }) {
               <button
                 className="mt-1 p-1 px-2"
                 onClick={() => {
-                  setCards(cards.filter((x) => x.id !== pregunta.id));
+                  aggPregunta(preguntas.filter((a) => 
+                    a.id !== pre.id
+                  ));
                 }}
               >
                 <TrashIcon className="block h-6 w-6" aria-hidden="true" />
@@ -262,16 +258,17 @@ export default function Card({ text, key }) {
                     placeholder="Define tu pregunta"
                     defaultValue={pre.pregunta}
                     onChange={(e) =>
-                      aggPregunta(
+                      {aggPregunta(
                         preguntas.map((pregunta) => {
                           if (pregunta.id == pre.id) {
-                            console.log(preguntas);
                             return { ...pregunta, pregunta: e.target.value };
                           } else {
                             return pregunta;
                           }
                         })
-                      )
+                      );
+                      form(preguntas);
+                    }
                     }
                   />
                 </div>
@@ -327,7 +324,8 @@ export default function Card({ text, key }) {
       <button
         className="m-4 bg-gray-700 text-white p-3 cursor-pointer rounded-lg"
         onClick={() => {
-          aggPregunta([...preguntas, { id: nextId, pregunta: "" }]);
+          aggPregunta([...preguntas, { id: nextId, pregunta: "", list: false}]);
+          form(preguntas);
           aggnextId(nextId + 1);
         }}
       >
