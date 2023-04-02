@@ -44,7 +44,7 @@ function VerForm() {
     }
     );
   const { mutate: Respuestas } = useMutation(
-    (data) => axios.post("http://localhost:3000/CrearRespuesta", data),
+    (data) => axios.post("http://localhost:3000/CrearRespuesta", data, config),
     {
       onSuccess: (response) => {
         console.log(response.data)
