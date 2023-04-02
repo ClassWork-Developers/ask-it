@@ -11,13 +11,14 @@ export default function Formularios() {
     {
       onSuccess: (response) => {
         setForms(response.data.Encuestas);
+        console.log(forms);
 	},
       onError: (err) => console.log(err),
     }
 	);
   useEffect(() => {
     Formularios();
-	console.log(forms);
+    console.log(forms);
   }, []);
 
   return (
@@ -28,13 +29,13 @@ export default function Formularios() {
             Formularios creados por ti
           </h2>
           {/* <Formulario form={} /> */}
+          <div  className="mt-6 space-y-12 lg:grid lg:grid-cols-3 lg:gap-x-6 lg:space-y-0">
           {forms.map((data) => (
-            <div key={data.id} className="mt-6 space-y-12 lg:grid lg:grid-cols-3 lg:gap-x-6 lg:space-y-0">
-              <Link to={`/sesion/form/${data.id}`}>
+              <Link key={data.id} to={`/sesion/form/${data.id}`}>
                 <Formulario form={plantillas[1]} name={data.nombre}/>
               </Link>
-            </div>
           ))}
+          </div>
         </div>
       </div>
     </>
