@@ -15,11 +15,9 @@ export default function Edicion() {
   const [periodo, setPeriodo] = useState("");
   const [description, setDescription] = useState("");
 	function PreguntasForm(data) {
-    console.log(data)
     let pregNew = []
     let pregList = []
     for (const pre in data) {
-      console.log(pre.list);
       if (data[pre].list == false) {
         pregNew.push(data[pre])
       } else {
@@ -41,10 +39,9 @@ export default function Edicion() {
     (data) => axios.post("http://localhost:3000/CrearEncuesta", data, config),
     {
       onSuccess: (response) => {
-        console.log(response.data);
-        console.log(nombre);
-        id_encuesta = response.data.id;
-        Preguntas({ id_encuesta, array_preguntas})
+        id_encuesta = response.data.data.id;
+        Preguntas({ array_preguntas, id_encuesta})
+        Relacion({ relaciones, id_encuesta})
 				setNombre("");
 				setPeriodo("");
 				setDescription("");
@@ -61,12 +58,17 @@ export default function Edicion() {
       onError: (err) => console.log(err),
     }
   );
-  function Add_encuesta(nombre, periodo /* description, */) {
-    Encuestas({ nombre, periodo });
-  }
+  const { mutate: Relacion } = useMutation(
+    (data) => axios.post("http://localhost:3000/CrearRelacion", data, config),
+    {
+      onSuccess: (response) => {
+        console.log(response.data);
+      },
+      onError: (err) => console.log(err),
+    }
+  );
   const handleSubmit = () => {
-    Add_encuesta(nombre, periodo /* description, */);
-    /* Add_pregunta(pregunta); */
+    Encuestas({ nombre, periodo });
   };
   let user = JSON.parse(localStorage.getItem("currentUser"));
   return (
