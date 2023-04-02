@@ -10,6 +10,7 @@ import Edicion from '../components/Edicion';
 import UndefinedPath from '../components/UndefinedPath';
 import Register from '../views/Register'
 import Login from '../views/Login'
+import VerForm from '../components/VerForm';
 
 export default function Router() {
   return (
@@ -33,6 +34,8 @@ export default function Router() {
           <Route path='Respondidos' element={<Respondidos />} />
           {/* Creación y/o edición de un formulario */}
           <Route path='Edicion' element={<Edicion />} />
+          {/* Ver form individual */}
+          <Route path='form/:id' element={<VerForm />} />
         </Route>
         <Route path='*' element={<UndefinedPath />} />
       </Routes>
