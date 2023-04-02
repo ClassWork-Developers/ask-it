@@ -189,6 +189,11 @@ export default function Card({ form }) {
   const Show = () => {
     show == "hidden" ? setShow("flex") : setShow("hidden");
   };
+  const eliminarPregunta = (id) => {
+    const pre = preguntas.filter((a) => 
+    a.id !== id)
+    aggPregunta(pre)
+  };
   return (
     <>
       <ul className="bg-gray-300 p-5 w-1/2 mx-auto rounded-lg text-xl m-3 cursor-pointer">
@@ -234,11 +239,7 @@ export default function Card({ form }) {
               {/* Eliminar pregunta */}
               <button
                 className="mt-1 p-1 px-2"
-                onClick={() => {
-                  aggPregunta(preguntas.filter((a) => 
-                    a.id !== pre.id
-                  ));
-                }}
+                onClick={() => eliminarPregunta(pre.id)}
               >
                 <TrashIcon className="block h-6 w-6" aria-hidden="true" />
                 {/* {pregunta.id} */}
@@ -256,7 +257,7 @@ export default function Card({ form }) {
                     id={pre.id}
                     className="block w-full p-3 h-9 ml-3 rounded-md border-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:py-1.5 sm:text-sm sm:leading-6"
                     placeholder="Define tu pregunta"
-                    defaultValue={pre.pregunta}
+                    value={pre.pregunta}
                     onChange={(e) =>
                       {aggPregunta(
                         preguntas.map((pregunta) => {
