@@ -1,10 +1,7 @@
 import { Circles } from 'react-loader-spinner';
 import { Link, Outlet } from 'react-router-dom';
-import { Fragment } from 'react';
-import { Disclosure, Menu, Transition } from '@headlessui/react';
-import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { useAuth0 } from '@auth0/auth0-react';
-import { userNavigation, navigationSesion } from '../assets/constantes';
+import { navigationSesion } from '../assets/constantes';
 import axios from 'axios';
 
 function classNames(...classes) {
@@ -70,7 +67,7 @@ export default function Nav() {
           <div className='space-y-3'>
             <div className='flex items-center'>
               <img
-                src='https://via.placeholder.com/150'
+                src='public/logo.svg'
                 alt='Logo de AskIt'
                 className='w-8 h-8 mr-2'
               />
@@ -157,18 +154,21 @@ export default function Nav() {
                   </li>
                 )}
                 {isAuthenticated && (
-                  <div className='bg-white-800 h-screen w-64 px-4 py-8'>
+                  <div className='bg-white h-screen w-64 px-4 py-8'>
                     <img
-                      className='h-16 w-16 rounded-full mx-auto'
+                      className='h-16 w-16 rounded-full mx-auto mb-2'
                       src={user.picture}
                       alt='Perfil de usuario'
                     />
-                    <div className='m-3'>
-                      <div className='text-base font-medium leading-none text-white'>
+                    <div className='text-center'>
+                      <div className='text-lg font-medium text-white mb-2'>
                         {user.nickname}
                       </div>
-                      <div className='text-sm font-medium leading-none text-gray-400'>
+                      <div className='text-sm font-medium text-dark-400 mb-4'>
                         {user.name}
+                      </div>
+                      <div className='text-sm font-medium text-dark-400'>
+                        {user.email}
                       </div>
                     </div>
                   </div>
