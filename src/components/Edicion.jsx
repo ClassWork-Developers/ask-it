@@ -13,7 +13,7 @@ export default function Edicion() {
   const [relaciones, setRelaciones] = useState([]);
   const [nombre, setNombre] = useState("");
   const [periodo, setPeriodo] = useState("");
-  const [description, setDescription] = useState("");
+  const [descripcion, setDescripcion] = useState("");
 	function PreguntasForm(data) {
     let pregNew = []
     let pregList = []
@@ -28,10 +28,10 @@ export default function Edicion() {
     setRelaciones(pregList)
 	}
   let id_encuesta = '';
-  let User = JSON.parse(localStorage.getItem("currentUser"));
+  let user = JSON.parse(localStorage.getItem("currentUser"));
   let config = {
     headers: {
-      Authorization: `Bearer ${User.token}`,
+      Authorization: `Bearer ${user.token}`,
     },
   };
   //Crear encuesta
@@ -44,7 +44,7 @@ export default function Edicion() {
         Relacion({ relaciones, id_encuesta})
 				setNombre("");
 				setPeriodo("");
-				setDescription("");
+				setDescripcion("");
       },
       onError: (err) => console.log(err),
     }
@@ -53,7 +53,6 @@ export default function Edicion() {
     (data) => axios.post("http://localhost:3000/CrearPregunta", data, config),
     {
       onSuccess: (response) => {
-        console.log(response.data);
       },
       onError: (err) => console.log(err),
     }
@@ -68,9 +67,8 @@ export default function Edicion() {
     }
   );
   const handleSubmit = () => {
-    Encuestas({ nombre, periodo });
+    Encuestas({ nombre, periodo, descripcion });
   };
-  let user = JSON.parse(localStorage.getItem("currentUser"));
   return (
     <>
       <section className="relative isolate overflow-hidden bg-zinc-200 py-6 px-6 lg:px-8 rounded-md">
@@ -107,8 +105,8 @@ export default function Edicion() {
               </div>
               <div className="mt-2 col-span-2">
                 <textarea
-                  value={description}
-                  onChange={(e) => setDescription(e.target.value)}
+                  value={descripcion}
+                  onChange={(e) => setDescripcion(e.target.value)}
                   id="about"
                   rows={3}
                   className="block w-full p-3 rounded-md border-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:py-1.5 sm:text-sm sm:leading-6"
