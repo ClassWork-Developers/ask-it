@@ -1,6 +1,5 @@
 import ComoFunciona from "../components/ComoFunciona";
 import Testimonios from "../components/Testimonios";
-import ContactoSeccion from "../components/ContactoSeccion";
 import Footer from "../components/footer";
 import { Link } from "react-router-dom";
 
@@ -42,9 +41,6 @@ export default function Inicio() {
       </section>
       <section id="uso" className="flex-1">
         <ComoFunciona />
-      </section>
-      <section id="contacto" className="flex-1">
-        <ContactoSeccion />
       </section>
       <section id="" className="flex-none">
         <Footer />
