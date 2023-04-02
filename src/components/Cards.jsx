@@ -196,10 +196,10 @@ export default function Card({ form }) {
   };
   return (
     <>
-      <ul className="bg-gray-300 p-5 w-1/2 mx-auto rounded-lg text-xl m-3 cursor-pointer">
+      <ul className="bg-gray-300  w-1/2 mx-auto rounded-lg text-xl m-3 cursor-pointer">
         <li>
           <h3
-            className="flex items-center justify-between"
+            className="flex p-5 items-center justify-between"
             onClick={() => Show()}
           >
             Sugerencias de preguntas
@@ -208,7 +208,7 @@ export default function Card({ form }) {
         </li>
         {select.map((pre, preI) => (
           <li
-            className={`${show} justify-between pt-7 pb-3 border-b-2 border-gray-400`}
+            className={`${show} justify-between p-5 pt-7 pb-3 border-b-2 border-gray-400`}
             key={preI}
             onClick={() => {
               aggPregunta([...preguntas, { id: pre._id, pregunta: pre.pregunta, list: true }]);

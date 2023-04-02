@@ -11,6 +11,7 @@ import UndefinedPath from '../components/UndefinedPath';
 import Register from '../views/Register'
 import Login from '../views/Login'
 import VerForm from '../components/VerForm';
+import VerRespuestas from '../components/verRespuestas';
 
 export default function Router() {
   return (
@@ -27,7 +28,11 @@ export default function Router() {
           {/* Vista para elegir a partir de que plantilla hacer un formulario */}
           <Route index element={<Creacion />} />
           {/* Formularios hechos */}
-          <Route path='Formularios' element={<Formularios />} />
+          <Route path='Formularios' element={<Formularios busqueda={'general'} />} />
+          {/* Formularios del Usuario */}
+          <Route path='Formularios/user' element={<Formularios busqueda={'user'} />} />
+          {/* Ver formulario con respuestas */}
+          <Route path='respuestas/:id' element={<VerRespuestas/>} />
           {/* Búsqueda de formularios */}
           <Route path='Buscar' element={<Buscar />} />
           {/* Formularios respondidos */}

@@ -9,6 +9,7 @@ function VerForm() {
   const [formulario, setFormulario] = useState([
     {
       nombre: "",
+      descripcion:'',
       preguntas:[
         
       ]
@@ -75,7 +76,7 @@ function VerForm() {
         <h1 className="mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">
           {formulario[0].nombre}
         </h1>
-        <p></p>
+        <p>{formulario[0].descripcion}</p>
          {formulario[0].preguntas.map(x => (
           <div key={x.id} className="w-full bg-zinc-100 p-5 my-3 mt-1 rounded-md">
             <p className="mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">
