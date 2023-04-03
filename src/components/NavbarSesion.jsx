@@ -1,10 +1,7 @@
 import { Circles } from 'react-loader-spinner';
-import { Outlet } from 'react-router-dom';
-import { Fragment } from 'react';
-import { Disclosure, Menu, Transition } from '@headlessui/react';
-import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
+import { Link, Outlet } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
-import { userNavigation, navigationSesion } from '../assets/constantes';
+import { navigationSesion } from '../assets/constantes';
 import axios from 'axios';
 
 function classNames(...classes) {
@@ -12,7 +9,8 @@ function classNames(...classes) {
 }
 
 export default function Nav() {
-  const { logout, loginWithRedirect, user, isAuthenticated, isLoading } = useAuth0();
+  const { logout, loginWithRedirect, user, isAuthenticated, isLoading } =
+    useAuth0();
 
   function SendAuth(object) {
     axios
@@ -38,7 +36,15 @@ export default function Nav() {
   if (isLoading) {
     return (
       <div className='flex items-center justify-center min-h-screen'>
-        <Circles height='80' width='80' color='gray' ariaLabel='circles-loading' wrapperStyle={{}} wrapperClass='' visible={true} />
+        <Circles
+          height='80'
+          width='80'
+          color='gray'
+          ariaLabel='circles-loading'
+          wrapperStyle={{}}
+          wrapperClass=''
+          visible={true}
+        />
       </div>
     );
   }
@@ -57,180 +63,120 @@ export default function Nav() {
   return (
     <>
       <div className='flex'>
-        <Disclosure as='nav' className='bg-gray-200 h-[100vh] w-[15vw] flex flex-col items-center'>
-          {({ open }) => (
-            <>
-              <div className='flex-shrink-0 m-6'>
-                <img className='h-20 w-20' src='/logo.svg' alt='Your Company' />
-              </div>
-              <div className='hidden md:flex flex-col space-x-4 grow'>
-                {navigationSesion.map((item) => (
-                  <a
-                    key={item.name}
-                    href={item.href}
-                    className={classNames(
-                      item.current ? 'bg-gray-900 text-white' : 'text-gray-800 hover:bg-gray-700 hover:text-white',
-                      'rounded-md px-3 py-2 my-3 text-sm font-medium'
-                    )}
-                    aria-current={item.current ? 'page' : undefined}
-                  >
-                    {item.name}
-                  </a>
-                ))}
-                {!isAuthenticated && (
-                  <p
-                    onClick={() => {
-                      loginWithRedirect();
-                    }}
-                    className='flex gap-4 items-center text-right rounded-md px-3 py-2 my-3 text-sm font-medium cursor-pointer text-gray-800 hover:bg-gray-700 hover:text-white'
+        <div className='flex flex-col h-screen p-3 bg-white shadow w-60'>
+          <div className='space-y-3'>
+            <div className='flex items-center'>
+              <img
+                src='public/logo.svg'
+                alt='Logo de AskIt'
+                className='w-8 h-8 mr-2'
+              />
+              <h2 className='text-xl font-bold'>Ask It</h2>
+            </div>
+
+            <div className='flex-1'>
+              <ul className='pt-2 pb-4 space-y-1 text-sm'>
+                {isAuthenticated &&
+                  navigationSesion.map((nav) => (
+                    <li className='rounded-sm'>
+                      <Link
+                        to={nav.href}
+                        className='flex items-center p-2 space-x-3 rounded-md'
+                      >
+                        <svg
+                          xmlns='http://www.w3.org/2000/svg'
+                          className='w-6 h-6'
+                          fill='none'
+                          viewBox='0 0 24 24'
+                          stroke='currentColor'
+                          strokeWidth={2}
+                        >
+                          <path
+                            strokeLinecap='round'
+                            strokeLinejoin='round'
+                            d={nav.icon}
+                          />
+                        </svg>
+                        <span>{nav.name}</span>
+                      </Link>
+                    </li>
+                  ))}
+
+                {!isAuthenticated ? (
+                  <li
+                    className='rounded-sm'
+                    onClick={() => loginWithRedirect()}
                   >
                     <svg
                       xmlns='http://www.w3.org/2000/svg'
+                      className='w-6 h-6'
                       fill='none'
                       viewBox='0 0 24 24'
-                      strokeWidth={1.5}
                       stroke='currentColor'
-                      className='w-6 h-6'
+                      strokeWidth={2}
                     >
                       <path
                         strokeLinecap='round'
                         strokeLinejoin='round'
-                        d='M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75'
+                        d='M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1'
                       />
                     </svg>
-                    Iniciar Sesión
-                  </p>
-                )}
-              </div>
-              <div className='hidden md:block'>
-                {/* Profile dropdown */}
-                {isAuthenticated && (
-                  <Menu as='div' className='relative ml-3'>
-                    <div>
-                      <Menu.Button className='flex max-w-xs items-center rounded-full bg-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800'>
-                        <span className='sr-only'>Open user menu</span>
-                        <img className='h-8 w-8 rounded-full' src={user.picture} alt='' />
-                      </Menu.Button>
-                    </div>
-                    <Transition
-                      as={Fragment}
-                      enter='transition ease-out duration-100'
-                      enterFrom='transform opacity-0 scale-95'
-                      enterTo='transform opacity-100 scale-100'
-                      leave='transition ease-in duration-75'
-                      leaveFrom='transform opacity-100 scale-100'
-                      leaveTo='transform opacity-0 scale-95'
+                    <span>LogIn</span>
+                  </li>
+                ) : (
+                  <li className='rounded-sm'>
+                    <a
+                      href='#'
+                      className='flex items-center p-2 space-x-3 rounded-md'
                     >
-                      <Menu.Items className='absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none'>
-                        {userNavigation.map((item) => (
-                          <Menu.Item key={item.name}>
-                            {({ active }) => (
-                              <a href={item.href} className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}>
-                                {item.name}
-                              </a>
-                            )}
-                          </Menu.Item>
-                        ))}
-                        <p
-                          onClick={() => {
-                            logout();
-                            localStorage.removeItem('currentUser');
-                          }}
-                          className={'block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer'}
-                        >
-                          Log out
-                        </p>
-                      </Menu.Items>
-                    </Transition>
-                  </Menu>
-                )}
-                <div className='ml-4 flex items-center md:ml-6'></div>
-              </div>
-              <div className='-mr-2 flex md:hidden'>
-                {/* Mobile menu button */}
-                <Disclosure.Button className='inline-flex items-center justify-center rounded-md bg-gray-200 p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800'>
-                  <span className='sr-only'>Open main menu</span>
-                  {open ? <XMarkIcon className='block h-6 w-6' aria-hidden='true' /> : <Bars3Icon className='block h-6 w-6' aria-hidden='true' />}
-                </Disclosure.Button>
-              </div>
-              <Disclosure.Panel className='md:hidden'>
-                <div className='space-y-1 px-2 pt-2 pb-3 sm:px-3'>
-                  {navigationSesion.map((item) => (
-                    <Disclosure.Button
-                      key={item.name}
-                      as='a'
-                      href={item.href}
-                      className={classNames(
-                        item.current ? 'bg-gray-900 text-white' : 'text-gray-800 hover:bg-gray-700 hover:text-white',
-                        'block rounded-md px-3 py-2 text-base font-medium'
-                      )}
-                      aria-current={item.current ? 'page' : undefined}
-                    >
-                      {item.name}
-                    </Disclosure.Button>
-                  ))}
-                  {!isAuthenticated && (
-                    <h1
-                      onClick={() => {
-                        loginWithRedirect();
-                      }}
-                      className='flex gap-2 items-center text-right rounded-md px-3 py-2 text-base font-medium text-gray-800 hover:bg-gray-700 hover:text-white cursor-pointer'
-                    >
-                      Iniciar Sesión
                       <svg
                         xmlns='http://www.w3.org/2000/svg'
+                        className='w-6 h-6'
                         fill='none'
                         viewBox='0 0 24 24'
-                        strokeWidth={1.5}
                         stroke='currentColor'
-                        className='w-6 h-6'
+                        strokeWidth={2}
                       >
                         <path
                           strokeLinecap='round'
                           strokeLinejoin='round'
-                          d='M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75'
+                          d='M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1'
                         />
                       </svg>
-                    </h1>
-                  )}
-                </div>
-                {isAuthenticated && (
-                  <div className='border-t border-gray-700 pt-4 pb-3'>
-                    <div className='flex items-center px-5'>
-                      <div className='flex-shrink-0'>
-                        <img className='h-10 w-10 rounded-full' src={user.picture} alt='' />
-                      </div>
-                      <div className='ml-3'>
-                        <div className='text-base font-medium leading-none text-white'>{user.nickname}</div>
-                        <div className='text-sm font-medium leading-none text-gray-400'>{user.name}</div>
-                      </div>
-                    </div>
-                    <div className='mt-3 space-y-1 px-2'>
-                      {userNavigation.map((item) => (
-                        <Disclosure.Button
-                          key={item.name}
-                          as='a'
-                          href={item.href}
-                          className='block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white'
-                        >
-                          {item.name}
-                        </Disclosure.Button>
-                      ))}
-                      <p
+                      <span
                         onClick={() => {
                           logout();
                         }}
-                        className={'block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white cursor-pointer'}
                       >
-                        Cerrar Sesión
-                      </p>
+                        Logout
+                      </span>
+                    </a>
+                  </li>
+                )}
+                {isAuthenticated && (
+                  <div className='bg-white h-screen w-64 px-4 py-8'>
+                    <img
+                      className='h-16 w-16 rounded-full mx-auto mb-2'
+                      src={user.picture}
+                      alt='Perfil de usuario'
+                    />
+                    <div className='text-center'>
+                      <div className='text-lg font-medium text-white mb-2'>
+                        {user.nickname}
+                      </div>
+                      <div className='text-sm font-medium text-dark-400 mb-4'>
+                        {user.name}
+                      </div>
+                      <div className='text-sm font-medium text-dark-400'>
+                        {user.email}
+                      </div>
                     </div>
                   </div>
                 )}
-              </Disclosure.Panel>
-            </>
-          )}
-        </Disclosure>
+              </ul>
+            </div>
+          </div>
+        </div>
         <main className='grow'>
           <div className='mx-auto max-w-7xl py-6 sm:px-6 lg:px-8'>
             <Outlet />

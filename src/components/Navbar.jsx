@@ -3,7 +3,11 @@ import { Outlet, Link } from 'react-router-dom';
 import { Link as LinkScroll } from 'react-scroll';
 import { Fragment, useState } from 'react';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
-import { Bars3Icon, XMarkIcon, ArrowLeftOnRectangleIcon } from '@heroicons/react/24/outline';
+import {
+  Bars3Icon,
+  XMarkIcon,
+  ArrowLeftOnRectangleIcon,
+} from '@heroicons/react/24/outline';
 import { useAuth0 } from '@auth0/auth0-react';
 import { navigation, userNavigation } from '../assets/constantes';
 
@@ -14,22 +18,34 @@ function classNames(...classes) {
 export default function Nav() {
   //LogOut();
 
-  const { logout, loginWithRedirect, user, isAuthenticated, isLoading } = useAuth0();
+  const { logout, loginWithRedirect, user, isAuthenticated, isLoading } =
+    useAuth0();
   const [inicioViewPort, setinicioViewPort] = useState(true);
   const [nosotrosViewPort, setnosotrosViewPort] = useState(false);
   const [usoViewPort, setusoViewPort] = useState(false);
-  const [contactoViewPort, setcontactoViewPort] = useState(false);
 
   function scroll() {
     const inicioId = document.getElementById('inicio').getBoundingClientRect();
-    const nosotrosId = document.getElementById('nosotros').getBoundingClientRect();
+    const nosotrosId = document
+      .getElementById('nosotros')
+      .getBoundingClientRect();
     const usoId = document.getElementById('uso').getBoundingClientRect();
-    const contactoId = document.getElementById('contacto').getBoundingClientRect();
 
-    setinicioViewPort(inicioId.top < (window.innerHeight || document.documentElement.clientHeight) && inicioId.bottom > 0);
-    setnosotrosViewPort(nosotrosId.top < (window.innerHeight || document.documentElement.clientHeight) && nosotrosId.bottom > 0);
-    setusoViewPort(usoId.top < (window.innerHeight || document.documentElement.clientHeight) && usoId.bottom > 0);
-    setcontactoViewPort(contactoId.top < (window.innerHeight || document.documentElement.clientHeight) && usoId.bottom > 0);
+    setinicioViewPort(
+      inicioId.top <
+        (window.innerHeight || document.documentElement.clientHeight) &&
+        inicioId.bottom > 0
+    );
+    setnosotrosViewPort(
+      nosotrosId.top <
+        (window.innerHeight || document.documentElement.clientHeight) &&
+        nosotrosId.bottom > 0
+    );
+    setusoViewPort(
+      usoId.top <
+        (window.innerHeight || document.documentElement.clientHeight) &&
+        usoId.bottom > 0
+    );
   }
   function viewPort(item) {
     switch (item) {
@@ -37,8 +53,6 @@ export default function Nav() {
         return nosotrosViewPort;
       case 'usoViewPort':
         return usoViewPort;
-      case 'contactoViewPort':
-        return contactoViewPort;
       default:
         return inicioViewPort;
     }
@@ -47,7 +61,15 @@ export default function Nav() {
   if (isLoading) {
     return (
       <div className='flex items-center justify-center min-h-screen'>
-        <Circles height='80' width='80' color='gray' ariaLabel='circles-loading' wrapperStyle={{}} wrapperClass='' visible={true} />
+        <Circles
+          height='80'
+          width='80'
+          color='gray'
+          ariaLabel='circles-loading'
+          wrapperStyle={{}}
+          wrapperClass=''
+          visible={true}
+        />
       </div>
     );
   }
@@ -61,7 +83,11 @@ export default function Nav() {
               <div className='flex h-16 items-center justify-between'>
                 <div className='flex items-center'>
                   <div className='flex-shrink-0'>
-                    <img className='inline-block h-10 w-10 ' src='/logo.svg' alt='' />
+                    <img
+                      className='inline-block h-10 w-10 '
+                      src='/logo.svg'
+                      alt=''
+                    />
                   </div>
                   <div className='hidden md:block'>
                     <div className='ml-10 flex items-baseline space-x-4'>
@@ -73,7 +99,9 @@ export default function Nav() {
                           smooth={true}
                           duration={500}
                           className={classNames(
-                            viewPort(item.viewPort) ? 'bg-gray-900 text-white' : 'text-gray-800 hover:bg-gray-700 hover:text-white',
+                            viewPort(item.viewPort)
+                              ? 'bg-gray-900 text-white'
+                              : 'text-gray-800 hover:bg-gray-700 hover:text-white',
                             'rounded-md px-3 py-2 text-sm font-medium'
                           )}
                         >
@@ -98,7 +126,11 @@ export default function Nav() {
                       <div>
                         <Menu.Button className='flex max-w-xs items-center rounded-full bg-transparent text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800'>
                           <span className='sr-only'>Open user menu</span>
-                          <img className='h-8 w-8 rounded-full' src={user.picture} alt='' />
+                          <img
+                            className='h-8 w-8 rounded-full'
+                            src={user.picture}
+                            alt=''
+                          />
                         </Menu.Button>
                       </div>
                       <Transition
@@ -114,7 +146,13 @@ export default function Nav() {
                           {userNavigation.map((item) => (
                             <Menu.Item key={item.name}>
                               {({ active }) => (
-                                <a href={item.href} className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}>
+                                <a
+                                  href={item.href}
+                                  className={classNames(
+                                    active ? 'bg-gray-100' : '',
+                                    'block px-4 py-2 text-sm text-gray-700'
+                                  )}
+                                >
                                   {item.name}
                                 </a>
                               )}
@@ -125,7 +163,9 @@ export default function Nav() {
                               logout();
                               localStorage.removeItem('currentUser');
                             }}
-                            className={'block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer'}
+                            className={
+                              'block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer'
+                            }
                           >
                             Log out
                           </p>
@@ -139,7 +179,11 @@ export default function Nav() {
                   {/* Mobile menu button */}
                   <Disclosure.Button className='inline-flex items-center justify-center rounded-md bg-transparent p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800'>
                     <span className='sr-only'>Open main menu</span>
-                    {open ? <XMarkIcon className='block h-6 w-6' aria-hidden='true' /> : <Bars3Icon className='block h-6 w-6' aria-hidden='true' />}
+                    {open ? (
+                      <XMarkIcon className='block h-6 w-6' aria-hidden='true' />
+                    ) : (
+                      <Bars3Icon className='block h-6 w-6' aria-hidden='true' />
+                    )}
                   </Disclosure.Button>
                 </div>
               </div>
@@ -152,7 +196,9 @@ export default function Nav() {
                     as='a'
                     href={item.href}
                     className={classNames(
-                      item.current ? 'bg-gray-900 text-white' : 'text-gray-800 hover:bg-gray-700 hover:text-white',
+                      item.current
+                        ? 'bg-gray-900 text-white'
+                        : 'text-gray-800 hover:bg-gray-700 hover:text-white',
                       'block rounded-md px-3 py-2 text-base font-medium'
                     )}
                     aria-current={item.current ? 'page' : undefined}
@@ -173,11 +219,19 @@ export default function Nav() {
                 <div className='border-t border-gray-700 pt-4 pb-3'>
                   <div className='flex items-center px-5'>
                     <div className='flex-shrink-0'>
-                      <img className='h-10 w-10 rounded-full' src={user.picture} alt='' />
+                      <img
+                        className='h-10 w-10 rounded-full'
+                        src={user.picture}
+                        alt=''
+                      />
                     </div>
                     <div className='ml-3'>
-                      <div className='text-base font-medium leading-none text-white'>{user.nickname}</div>
-                      <div className='text-sm font-medium leading-none text-gray-400'>{user.name}</div>
+                      <div className='text-base font-medium leading-none text-white'>
+                        {user.nickname}
+                      </div>
+                      <div className='text-sm font-medium leading-none text-gray-400'>
+                        {user.name}
+                      </div>
                     </div>
                   </div>
                   <div className='mt-3 space-y-1 px-2'>
@@ -196,7 +250,9 @@ export default function Nav() {
                         logout();
                         localStorage.removeItem('currentUser');
                       }}
-                      className={'block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white cursor-pointer'}
+                      className={
+                        'block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white cursor-pointer'
+                      }
                     >
                       Cerrar Sesión
                     </p>
