@@ -5,6 +5,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 import { useMutation } from 'react-query';
 import Swal from 'sweetalert2';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 const user = [{ rol: 'Estudiante' }, { rol: 'Profesor' }];
 
@@ -101,6 +102,9 @@ function Login() {
             </button>
           </div>
         )}
+        <Link to={'/registro'}>
+          ¿Aun no tienes una cuenta? Registrate <strong>AQUI</strong>
+        </Link>
       </form>
     </div>
   );

@@ -5,9 +5,10 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { useMutation } from "react-query";
 import axios from "axios";
 import { useEffect } from "react";
+
 export default function Creacion() {
   const { user, isAuthenticated } = useAuth0();
-
+  
   //CONEXION CON LA API
   const { mutate: InicioE } = useMutation(
     (data) => axios.post("http://localhost:3000/AuthRoute", data),
@@ -43,10 +44,11 @@ export default function Creacion() {
       setInicio(user);
     }
   }, [isAuthenticated]);
+
   return (
     <>
       <div className="bg-gray-100">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl p-4 sm:px-6 lg:px-8">
           <h2 className="p-5 text-2xl font-bold text-gray-900">
             Crear a partir de un formulario en blanco o de una plantilla
           </h2>

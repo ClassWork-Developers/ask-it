@@ -8,12 +8,17 @@ import {
 import Card from "./Cards";
 import { useMutation } from "react-query";
 import axios from "axios";
+import Swal from 'sweetalert2';
+
+
+
 export default function Edicion() {
   const [array_preguntas, setPreguntas] = useState([]);
   const [relaciones, setRelaciones] = useState([]);
   const [nombre, setNombre] = useState("");
   const [periodo, setPeriodo] = useState("");
   const [descripcion, setDescripcion] = useState("");
+
 	function PreguntasForm(data) {
     let pregNew = []
     let pregList = []
@@ -27,6 +32,8 @@ export default function Edicion() {
     setPreguntas(pregNew)
     setRelaciones(pregList)
 	}
+
+
   let id_encuesta = '';
   let user = JSON.parse(localStorage.getItem("currentUser"));
   let config = {
@@ -34,6 +41,8 @@ export default function Edicion() {
       Authorization: `Bearer ${user.token}`,
     },
   };
+
+
   //Crear encuesta
   const { mutate: Encuestas } = useMutation(
     (data) => axios.post("http://localhost:3000/CrearEncuesta", data, config),
@@ -45,6 +54,15 @@ export default function Edicion() {
 				setNombre("");
 				setPeriodo("");
 				setDescripcion("");
+        Swal.fire({
+          position: "top-center",
+          icon: "success",
+          title: "Formulario Creado",
+          showConfirmButton: false,
+          timer: 2000,
+        }).then(()=>{
+          location.href='/sesion'
+        })
       },
       onError: (err) => console.log(err),
     }
@@ -67,7 +85,7 @@ export default function Edicion() {
     }
   );
   const handleSubmit = () => {
-    Encuestas({ nombre, periodo, descripcion });
+    Encuestas({ propietario:user.id, nombre, periodo, descripcion });
   };
   return (
     <>

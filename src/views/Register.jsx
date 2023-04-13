@@ -3,6 +3,7 @@ import { Listbox, Transition } from '@headlessui/react';
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid';
 import { useAuth0 } from '@auth0/auth0-react';
 import { useMutation } from 'react-query';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 
@@ -141,6 +142,9 @@ function Login() {
             </button>
           </div>
         )}
+                <Link to={'/login'}>
+          ¿Ya tienes una cuenta? Inicia Sesión <strong>AQUI</strong>
+        </Link>
       </form>
     </div>
   );

@@ -7,12 +7,15 @@ import { useState, useEffect } from "react";
 
 
 export default function Formularios({busqueda}) {
+  let user = localStorage.getItem('currentUser');
+  user = JSON.parse(user);
   const [forms, setForms] = useState([]);
   const { mutate: Formularios } = useMutation(
-    (data) => axios.get("http://localhost:3000/FullData"),
+    (data) => axios.get(busqueda=='general'?"http://localhost:3000/FullData":`http://localhost:3000/DataFilter/${user.id}`),
     {
       onSuccess: (response) => {
-        setForms(busqueda == 'general' ? response.data.Encuestas : response.data.Encuestas);
+        console.log(response)
+        setForms(response.data.Encuestas);
         console.log(forms);
       },
       onError: (err) => console.log(err),
@@ -20,8 +23,7 @@ export default function Formularios({busqueda}) {
   );
   useEffect(() => {
     Formularios();
-    console.log(forms);
-  }, []);
+  }, [forms]);
 
   return (
     <>
@@ -29,7 +31,7 @@ export default function Formularios({busqueda}) {
         <div className="mx-auto p-4 max-w-7xl px-4 sm:px-6 lg:px-8">
           <h2 className="p-5 text-2xl font-bold text-gray-900">Formularios</h2>
           {/* <Formulario form={} /> */}
-          <div className="mt-6 space-y-12 lg:grid lg:grid-cols-3 lg:gap-x-6 lg:space-y-0">
+          <div className="mt-6 space-y-12 lg:grid lg:grid-cols-3 lg:gap-6 lg:space-y-0">
             {forms.map((data) => (
               <Link key={data.id} to={busqueda == 'general' ?`/sesion/form/${data.id}`:`/sesion/respuestas/${data.id}`}>
                 <Formulario form={plantillas[1]} name={data.nombre} />
