@@ -89,7 +89,7 @@ export default function Edicion() {
   };
   return (
     <>
-      <section className="relative isolate overflow-hidden bg-zinc-200 py-6 px-6 lg:px-8 rounded-md">
+      <section className="relative isolate overflow-hidden bg-zinc-200 dark:bg-zinc-500 py-6 px-6 lg:px-8 rounded-md">
         <div className="mx-auto max-w-2xl lg:max-w-4xl">
           <figure>
             <figcaption>

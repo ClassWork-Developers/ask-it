@@ -27,9 +27,9 @@ export default function Formularios({busqueda}) {
 
   return (
     <>
-      <div className="bg-gray-100">
+      <div className="bg-gray-100 dark:bg-gray-700">
         <div className="mx-auto p-4 max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="p-5 text-2xl font-bold text-gray-900">Formularios</h2>
+          <h2 className="p-5 text-2xl font-bold text-gray-900 dark:text-gray-300">Formularios</h2>
           {/* <Formulario form={} /> */}
           <div className="mt-6 space-y-12 lg:grid lg:grid-cols-3 lg:gap-6 lg:space-y-0">
             {forms.map((data) => (
