@@ -86,14 +86,14 @@ function VerForm() {
         className="flex flex-col w-full items-center gap-5"
         onSubmit={handleSubmit}
       >
-        <h1 className="mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">
+        <h1 className="mt-3 text-lg font-semibold leading-6 text-gray-900 dark:text-gray-300  group-hover:text-gray-600">
           {formulario[0].nombre}
         </h1>
-        <p>{formulario[0].descripcion}</p>
+        <p className="dark:text-gray-300">{formulario[0].descripcion}</p>
         {formulario[0].preguntas.map((x) => (
           <div
             key={x.id}
-            className="w-full bg-zinc-100 p-5 my-3 mt-1 rounded-md"
+            className="w-full bg-zinc-100 dark:bg-zinc-500 p-5 my-3 mt-1 rounded-md"
           >
             <p className="mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">
               {x.pregunta}
@@ -115,7 +115,7 @@ function VerForm() {
           </div>
         ))}
         <button
-          className="m-4 bg-gray-700 text-white p-3 cursor-pointer rounded-lg"
+          className="m-4 bg-gray-700 dark:bg-gray-500 text-white p-3 cursor-pointer rounded-lg"
           type="submit"
         >
           Enviar formulario

@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 export default function Inicio() {
   return (
-    <div className='flex flex-col min-h-screen'>
+    <div className='flex flex-col min-h-screen dark:bg-gray-700'>
       <section id='inicio' className='flex-1'>
         <header className='max-h-screen flex flex-col md:flex-row md:gap-10'>
           <div className='md:w-1/2 flex flex-col justify-center gap-8 p-10'>
