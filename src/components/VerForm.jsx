@@ -98,21 +98,27 @@ function VerForm() {
               {x.pregunta}
             </p>
             {!x.vof ? (
-            <input
-              onChange={(e) => {
-                addRespuesta(e.target.value, x.id);
-              }}
-              value={respuestas.forEach((r) => {
-                if (r.id == x.id) return r.respuesta;
-              })}
-              // value={respuestas.filter((r) => { if (r.id == x.id) return r.respuesta})}
-              className="block w-full p-3 h-9 ml-3 mt-3 rounded-md border-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:py-1.5 sm:text-sm sm:leading-6"
-              type="text"
-              name=""
-              id=""
-              placeholder="respuesta"
-            />) : (
-              <>aquivalodesiono {x.vof}</>
+              <input
+                onChange={(e) => {
+                  addRespuesta(e.target.value, x.id);
+                }}
+                value={respuestas.forEach((r) => {
+                  if (r.id == x.id) return r.respuesta;
+                })}
+                // value={respuestas.filter((r) => { if (r.id == x.id) return r.respuesta})}
+                className="block w-full p-3 h-9 ml-3 mt-3 rounded-md border-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:py-1.5 sm:text-sm sm:leading-6"
+                type="text"
+                name=""
+                id=""
+                placeholder="respuesta"
+              />
+            ) : (
+              <div className="flex flex-col items-start justify-center gap-5 m-3">
+              <label className="flex gap-3 items-center" htmlFor="Verdadero"><input type="radio" name="V/F" id="Verdadero" />Verdadero</label>
+                
+              <label className="flex gap-3 items-center" htmlFor="Falso"><input type="radio" name="V/F" id="Falso" />Falso</label>
+                
+              </div>
             )}
           </div>
         ))}

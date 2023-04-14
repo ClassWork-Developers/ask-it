@@ -25,7 +25,9 @@ export default function Card({ form }) {
     },
   };
   const [select, setSelect] = useState([]);
-  const [preguntas, aggPregunta] = useState([{ id: 1, pregunta: "", list: false, vof: false }]);
+  const [preguntas, aggPregunta] = useState([
+    { id: 1, pregunta: "", list: false, vof: false },
+  ]);
   const { mutate: PreguntasList } = useMutation(
     (data) => axios.get("http://localhost:3000/MostrarPreguntas"),
     {
@@ -36,15 +38,14 @@ export default function Card({ form }) {
     }
   );
   useEffect(() => {
-		PreguntasList()
-	}, [])
+    PreguntasList();
+  }, []);
   const Show = () => {
     show == "hidden" ? setShow("flex") : setShow("hidden");
   };
   const eliminarPregunta = (id) => {
-    const pre = preguntas.filter((a) => 
-    a.id !== id)
-    aggPregunta(pre)
+    const pre = preguntas.filter((a) => a.id !== id);
+    aggPregunta(pre);
   };
   return (
     <>
@@ -63,7 +64,10 @@ export default function Card({ form }) {
             className={`${show} justify-between p-5 pt-7 pb-3 border-b-2 border-gray-400`}
             key={preI}
             onClick={() => {
-              aggPregunta([...preguntas, { id: pre._id, pregunta: pre.pregunta, list: true, vof: false }]);
+              aggPregunta([
+                ...preguntas,
+                { id: pre._id, pregunta: pre.pregunta, list: true, vof: false },
+              ]);
               form(preguntas);
             }}
           >
@@ -74,39 +78,39 @@ export default function Card({ form }) {
       {preguntas.map((pre, preIndex) => (
         <div className="w-full" key={preIndex}>
           <div className="w-full flex justify-end">
-              {/* Duplicar pregunta */}
-              <button 
-                className="mt-1 p-1 px-2"
-                onClick={() => {
-                  aggPregunta([...preguntas, { id: nextId, pregunta: pre.pregunta, list: false, vof: false}]);
-                  aggnextId(nextId + 1);
-                  form(preguntas);
-                }}
-              >
-                <ClipboardDocumentIcon
-                  className="block h-6 w-6"
-                  aria-hidden="true"
-                />
-              </button>
-              {/* Eliminar pregunta */}
-              <button
-                className="mt-1 p-1 px-2"
-                onClick={() => eliminarPregunta(pre.id)}
-              >
-                <TrashIcon className="block h-6 w-6" aria-hidden="true" />
-                {/* {pregunta.id} */}
-              </button>
-            </div>
-          {/* card */}
-          <div className="bg-zinc-100 p-5 my-3 mt-1 rounded-md">
-            <header className="w-full">
-              <div className="flex">
-                <p className="mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">
-                  Pregunta:
-                </p>
-                <div className="mt-2 grow">
-                  {pre.list == false ? (
-                  <input
+            {/* Duplicar pregunta */}
+            <button
+              className="mt-1 p-1 px-2"
+              onClick={() => {
+                aggPregunta([
+                  ...preguntas,
+                  {
+                    id: nextId,
+                    pregunta: pre.pregunta,
+                    list: false,
+                    vof: false,
+                  },
+                ]);
+                aggnextId(nextId + 1);
+                form(preguntas);
+              }}
+            >
+              <ClipboardDocumentIcon
+                className="block h-6 w-6"
+                aria-hidden="true"
+              />
+            </button>
+            {/* Eliminar pregunta */}
+            <button
+              className="mt-1 p-1 px-2"
+              onClick={() => eliminarPregunta(pre.id)}
+            >
+              <TrashIcon className="block h-6 w-6" aria-hidden="true" />
+              {/* {pregunta.id} */}
+            </button>
+          </div>
+          {/* card */}{" "}
+          {/* <input
                     id={pre.id}
                     type="checkbox"
                     checked={pre.vof}
@@ -123,15 +127,21 @@ export default function Card({ form }) {
                       form(preguntas);
                     }
                     }
-                  />
-                  ) : (<></>)}
+                  /> */}
+          <div className="bg-zinc-100 p-5 my-3 mt-1 rounded-md">
+            <header className="w-full">
+              <div className="flex">
+                <p className="mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">
+                  Pregunta:
+                </p>
+                <div className="mt-2 grow">
                   <input
                     id={pre.id}
                     className="block w-full p-3 h-9 ml-3 rounded-md border-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:py-1.5 sm:text-sm sm:leading-6"
                     placeholder="Define tu pregunta"
                     value={pre.pregunta}
-                    onChange={(e) =>
-                      {aggPregunta(
+                    onChange={(e) => {
+                      aggPregunta(
                         preguntas.map((pregunta) => {
                           if (pregunta.id == pre.id) {
                             return { ...pregunta, pregunta: e.target.value };
@@ -141,9 +151,34 @@ export default function Card({ form }) {
                         })
                       );
                       form(preguntas);
-                    }
-                    }
+                    }}
                   />
+                </div>
+              </div>
+              <div className="flex items-center gap-5">
+                <p className="mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">
+                  Tipo de Respuesta:
+                </p>
+                <div className="mt-2 grow">
+                <select
+                className="px-3 h-9 ml-3 rounded-md border-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300"
+                      onChange={(e) => {e.target.value == 'V/F' &&
+                        aggPregunta(
+                          preguntas.map((pregunta) => {
+                            if (pregunta.id == pre.id) {
+                              return { ...pregunta, vof: !pre.vof };
+                            } else {
+                              return pregunta;
+                            }
+                          })
+                          )
+                        form(preguntas);
+                        
+                      }}
+                    >
+                      <option value="Texto">Texto</option>
+                      <option value="V/F">V/F</option>
+                    </select>
                 </div>
               </div>
             </header>
@@ -174,7 +209,10 @@ export default function Card({ form }) {
       <button
         className="m-4 bg-gray-700 text-white p-3 cursor-pointer rounded-lg"
         onClick={() => {
-          aggPregunta([...preguntas, { id: nextId, pregunta: "", list: false, vof: false}]);
+          aggPregunta([
+            ...preguntas,
+            { id: nextId, pregunta: "", list: false, vof: false },
+          ]);
           form(preguntas);
           aggnextId(nextId + 1);
         }}
