@@ -3,9 +3,9 @@ import Formulario from './Formulario';
 export default function Buscar() {
 	return (
 		<>
-			<div className="bg-gray-100">
+			<div className="bg-gray-100 dark:bg-gray-600 dark:rounded-lg p-3">
 				<div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-					<h2 className="p-5 text-2xl font-bold text-gray-900">Descubre formularios</h2>
+					<h2 className="p-5 text-2xl font-bold text-gray-900 dark:text-gray-300">Descubre formularios</h2>
 					<div className="mt-5 max-w-xl grid grid-cols-2 gap-x-6 gap-y-8">
 						<div className="col-span-1">
 							<label

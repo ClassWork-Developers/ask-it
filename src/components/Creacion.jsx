@@ -47,9 +47,9 @@ export default function Creacion() {
 
   return (
     <>
-      <div className="bg-gray-100">
+      <div className="bg-gray-100 dark:bg-gray-700 ">
         <div className="mx-auto max-w-7xl p-4 sm:px-6 lg:px-8">
-          <h2 className="p-5 text-2xl font-bold text-gray-900">
+          <h2 className="p-5 text-2xl font-bold text-gray-900 dark:text-gray-300">
             Crear a partir de un formulario en blanco o de una plantilla
           </h2>
 
