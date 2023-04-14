@@ -128,31 +128,7 @@ export default function Card({ form }) {
                     }
                     }
                   /> */}
-          <div className="bg-zinc-100 p-5 my-3 mt-1 rounded-md">
-=======
-              {/* Duplicar pregunta */}
-              <button 
-                className="mt-1 p-1 px-2"
-                onClick={() => {
-                  aggPregunta([...preguntas, { id: nextId, pregunta: pre.pregunta, list: false}]);
-                  aggnextId(nextId + 1);
-                  form(preguntas);
-                }}
-              >
-                <ClipboardDocumentIcon
-                  className="block h-6 w-6"
-                  aria-hidden="true"
-                />
-              </button>
-              {/* Eliminar pregunta */}
-              <button
-                className="mt-1 p-1 px-2"
-                onClick={() => eliminarPregunta(pre.id)}
-              >
-                <TrashIcon className="block h-6 w-6" aria-hidden="true" />
-                {/* {pregunta.id} */}
-              </button>
-            </div>
+          
           {/* card */}
           <div className="bg-zinc-100 dark:bg-zinc-600 p-5 my-3 mt-1 rounded-md">
             <header className="w-full">
