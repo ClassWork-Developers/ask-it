@@ -24,7 +24,6 @@ function VerForm() {
     let res = respuestas.filter((r) => r.id !== id);
     setRespuestas([...res, { id: id, respuesta: newRespuesta }]);
   };
-
   const { mutate: Preguntas } = useMutation(
     (data) => axios.get("http://localhost:3000/FullData"),
     {
@@ -98,6 +97,7 @@ function VerForm() {
             <p className="mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">
               {x.pregunta}
             </p>
+            {!x.vof ? (
             <input
               onChange={(e) => {
                 addRespuesta(e.target.value, x.id);
@@ -111,7 +111,9 @@ function VerForm() {
               name=""
               id=""
               placeholder="respuesta"
-            />
+            />) : (
+              <>aquivalodesiono {x.vof}</>
+            )}
           </div>
         ))}
         <button

@@ -23,7 +23,7 @@ export default function Formularios({busqueda}) {
   );
   useEffect(() => {
     Formularios();
-  }, [forms]);
+  }, []);
 
   return (
     <>

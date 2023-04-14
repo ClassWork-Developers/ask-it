@@ -25,7 +25,7 @@ export default function Card({ form }) {
     },
   };
   const [select, setSelect] = useState([]);
-  const [preguntas, aggPregunta] = useState([{ id: 1, pregunta: "", list: false }]);
+  const [preguntas, aggPregunta] = useState([{ id: 1, pregunta: "", list: false, vof: false }]);
   const { mutate: PreguntasList } = useMutation(
     (data) => axios.get("http://localhost:3000/MostrarPreguntas"),
     {
@@ -63,7 +63,7 @@ export default function Card({ form }) {
             className={`${show} justify-between p-5 pt-7 pb-3 border-b-2 border-gray-400`}
             key={preI}
             onClick={() => {
-              aggPregunta([...preguntas, { id: pre._id, pregunta: pre.pregunta, list: true }]);
+              aggPregunta([...preguntas, { id: pre._id, pregunta: pre.pregunta, list: true, vof: false }]);
               form(preguntas);
             }}
           >
@@ -78,7 +78,7 @@ export default function Card({ form }) {
               <button 
                 className="mt-1 p-1 px-2"
                 onClick={() => {
-                  aggPregunta([...preguntas, { id: nextId, pregunta: pre.pregunta, list: false}]);
+                  aggPregunta([...preguntas, { id: nextId, pregunta: pre.pregunta, list: false, vof: false}]);
                   aggnextId(nextId + 1);
                   form(preguntas);
                 }}
@@ -105,6 +105,26 @@ export default function Card({ form }) {
                   Pregunta:
                 </p>
                 <div className="mt-2 grow">
+                  {pre.list == false ? (
+                  <input
+                    id={pre.id}
+                    type="checkbox"
+                    checked={pre.vof}
+                    onChange={(e) =>
+                      {aggPregunta(
+                        preguntas.map((pregunta) => {
+                          if (pregunta.id == pre.id) {
+                            return { ...pregunta, vof: !pre.vof };
+                          } else {
+                            return pregunta;
+                          }
+                        })
+                      );
+                      form(preguntas);
+                    }
+                    }
+                  />
+                  ) : (<></>)}
                   <input
                     id={pre.id}
                     className="block w-full p-3 h-9 ml-3 rounded-md border-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:py-1.5 sm:text-sm sm:leading-6"
@@ -154,7 +174,7 @@ export default function Card({ form }) {
       <button
         className="m-4 bg-gray-700 text-white p-3 cursor-pointer rounded-lg"
         onClick={() => {
-          aggPregunta([...preguntas, { id: nextId, pregunta: "", list: false}]);
+          aggPregunta([...preguntas, { id: nextId, pregunta: "", list: false, vof: false}]);
           form(preguntas);
           aggnextId(nextId + 1);
         }}
