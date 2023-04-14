@@ -63,49 +63,67 @@ export default function Nav() {
   return (
     <>
       <div className='flex'>
-        <div className='flex flex-col h-screen p-3 bg-white shadow w-60'>
-          <div className='space-y-3'>
-            <div className='flex items-center'>
-              <img
-                src='public/logo.svg'
-                alt='Logo de AskIt'
-                className='w-8 h-8 mr-2'
-              />
-              <h2 className='text-xl font-bold'>Ask It</h2>
-            </div>
+        <div className='flex flex-col h-screen bg-white shadow'>
+          <div className='flex items-center justify-between px-3 py-2'>
+            <img
+              src='public/logo.svg'
+              alt='Logo de AskIt'
+              className='w-8 h-8 mr-2'
+            />
+            <h2 className='text-xl font-bold'>Ask It</h2>
+          </div>
 
-            <div className='flex-1'>
-              <ul className='pt-2 pb-4 space-y-1 text-sm'>
-                {isAuthenticated &&
-                  navigationSesion.map((nav) => (
-                    <li className='rounded-sm'>
-                      <Link
-                        to={nav.href}
-                        className='flex items-center p-2 space-x-3 rounded-md'
+          <div className='flex-1 overflow-y-auto'>
+            <ul className='pt-2 pb-4 space-y-1 text-base md:text-sm'>
+              {isAuthenticated &&
+                navigationSesion.map((nav) => (
+                  <li className='px-3'>
+                    <Link
+                      to={nav.href}
+                      className='flex items-center p-2 space-x-3 rounded-md hover:bg-gray-100'
+                    >
+                      <svg
+                        xmlns='http://www.w3.org/2000/svg'
+                        className='w-6 h-6'
+                        fill='none'
+                        viewBox='0 0 24 24'
+                        stroke='currentColor'
+                        strokeWidth={2}
                       >
-                        <svg
-                          xmlns='http://www.w3.org/2000/svg'
-                          className='w-6 h-6'
-                          fill='none'
-                          viewBox='0 0 24 24'
-                          stroke='currentColor'
-                          strokeWidth={2}
-                        >
-                          <path
-                            strokeLinecap='round'
-                            strokeLinejoin='round'
-                            d={nav.icon}
-                          />
-                        </svg>
-                        <span>{nav.name}</span>
-                      </Link>
-                    </li>
-                  ))}
+                        <path
+                          strokeLinecap='round'
+                          strokeLinejoin='round'
+                          d={nav.icon}
+                        />
+                      </svg>
+                      <span>{nav.name}</span>
+                    </Link>
+                  </li>
+                ))}
 
-                {!isAuthenticated ? (
-                  <li
-                    className='rounded-sm'
-                    onClick={() => loginWithRedirect()}
+              {!isAuthenticated ? (
+                <li className='rounded-sm' onClick={() => loginWithRedirect()}>
+                  <svg
+                    xmlns='http://www.w3.org/2000/svg'
+                    className='w-6 h-6'
+                    fill='none'
+                    viewBox='0 0 24 24'
+                    stroke='currentColor'
+                    strokeWidth={2}
+                  >
+                    <path
+                      strokeLinecap='round'
+                      strokeLinejoin='round'
+                      d='M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1'
+                    />
+                  </svg>
+                  <span>LogIn</span>
+                </li>
+              ) : (
+                <li className='rounded-sm'>
+                  <a
+                    href='#'
+                    className='flex items-center p-2 space-x-3 rounded-md'
                   >
                     <svg
                       xmlns='http://www.w3.org/2000/svg'
@@ -121,60 +139,37 @@ export default function Nav() {
                         d='M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1'
                       />
                     </svg>
-                    <span>LogIn</span>
-                  </li>
-                ) : (
-                  <li className='rounded-sm'>
-                    <a
-                      href='#'
-                      className='flex items-center p-2 space-x-3 rounded-md'
+                    <span
+                      onClick={() => {
+                        logout();
+                      }}
                     >
-                      <svg
-                        xmlns='http://www.w3.org/2000/svg'
-                        className='w-6 h-6'
-                        fill='none'
-                        viewBox='0 0 24 24'
-                        stroke='currentColor'
-                        strokeWidth={2}
-                      >
-                        <path
-                          strokeLinecap='round'
-                          strokeLinejoin='round'
-                          d='M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1'
-                        />
-                      </svg>
-                      <span
-                        onClick={() => {
-                          logout();
-                        }}
-                      >
-                        Logout
-                      </span>
-                    </a>
-                  </li>
-                )}
-                {isAuthenticated && (
-                  <div className='bg-white h-screen w-64 px-4 py-8'>
-                    <img
-                      className='h-16 w-16 rounded-full mx-auto mb-2'
-                      src={user.picture}
-                      alt='Perfil de usuario'
-                    />
-                    <div className='text-center'>
-                      <div className='text-lg font-medium text-white mb-2'>
-                        {user.nickname}
-                      </div>
-                      <div className='text-sm font-medium text-dark-400 mb-4'>
-                        {user.name}
-                      </div>
-                      <div className='text-sm font-medium text-dark-400'>
-                        {user.email}
-                      </div>
+                      Logout
+                    </span>
+                  </a>
+                </li>
+              )}
+              {isAuthenticated && (
+                <div className='bg-white h-screen w-64 px-4 py-8'>
+                  <img
+                    className='h-16 w-16 rounded-full mx-auto mb-2'
+                    src={user.picture}
+                    alt='Perfil de usuario'
+                  />
+                  <div className='text-center'>
+                    <div className='text-lg font-medium text-white mb-2'>
+                      {user.nickname}
+                    </div>
+                    <div className='text-sm font-medium text-dark-400 mb-4'>
+                      {user.name}
+                    </div>
+                    <div className='text-sm font-medium text-dark-400'>
+                      {user.email}
                     </div>
                   </div>
-                )}
-              </ul>
-            </div>
+                </div>
+              )}
+            </ul>
           </div>
         </div>
         <main className='grow'>
