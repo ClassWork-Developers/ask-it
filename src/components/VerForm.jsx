@@ -113,10 +113,36 @@ function VerForm() {
                 placeholder="respuesta"
               />
             ) : (
-              <div className="flex flex-col items-start justify-center gap-5 m-3">
-              <label className="flex gap-3 items-center" htmlFor="Verdadero"><input type="radio" name="V/F" id="Verdadero" />Verdadero</label>
+              <div id={`resV/F-${x.id}`} className="flex flex-col items-start justify-center gap-5 m-3">
+              <label className="flex gap-3 items-center" htmlFor="Verdadero">
+                <input 
+                  type="radio" 
+                  name="V/F" 
+                  value={respuestas.forEach((r) => {
+                    if (r.id == x.id) return r.respuesta;
+                  })}
+                  id={x.id}
+                  onChange={(e) => {
+                    addRespuesta('Verdadero', x.id);
+                  }}
+                />
+                Verdadero
+              </label>
                 
-              <label className="flex gap-3 items-center" htmlFor="Falso"><input type="radio" name="V/F" id="Falso" />Falso</label>
+              <label className="flex gap-3 items-center" htmlFor="Falso">
+                <input 
+                  type="radio"
+                  name="V/F"
+                  value={respuestas.forEach((r) => {
+                    if (r.id == x.id) return r.respuesta;
+                  })}
+                  id={`fal-${x.id}`}
+                  onChange={(e) => {
+                    addRespuesta('Falso', x.id);
+                  }}
+                />
+                Falso
+              </label>
                 
               </div>
             )}

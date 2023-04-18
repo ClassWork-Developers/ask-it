@@ -161,24 +161,26 @@ export default function Card({ form }) {
                 </p>
                 <div className="mt-2 grow">
                 <select
-                className="px-3 h-9 ml-3 rounded-md border-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300"
-                      onChange={(e) => {e.target.value == 'V/F' &&
-                        aggPregunta(
-                          preguntas.map((pregunta) => {
-                            if (pregunta.id == pre.id) {
-                              return { ...pregunta, vof: !pre.vof };
-                            } else {
-                              return pregunta;
-                            }
-                          })
-                          )
-                        form(preguntas);
-                        
-                      }}
-                    >
-                      <option value="Texto">Texto</option>
-                      <option value="V/F">V/F</option>
-                    </select>
+                  id={pre.id}
+                  value={pre.vof}
+                  className="px-3 h-9 ml-3 rounded-md border-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300"
+                  onChange={(e) =>
+                    {aggPregunta(
+                      preguntas.map((pregunta) => {
+                        if (pregunta.id == pre.id) {
+                          return { ...pregunta, vof: e.target.value };
+                        } else {
+                          return pregunta;
+                        }
+                      })
+                    );
+                    form(preguntas);
+                  }
+                  }
+                  >
+                  <option value="false">Texto</option>
+                  <option value="true">V/F</option>
+                </select>
                 </div>
               </div>
             </header>

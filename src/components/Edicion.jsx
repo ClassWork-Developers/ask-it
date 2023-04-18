@@ -22,6 +22,7 @@ export default function Edicion() {
 	function PreguntasForm(data) {
     let pregNew = []
     let pregList = []
+    console.log(data);
     for (const pre in data) {
       if (data[pre].list == false) {
         pregNew.push(data[pre])
