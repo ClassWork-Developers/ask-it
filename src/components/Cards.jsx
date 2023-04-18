@@ -128,7 +128,9 @@ export default function Card({ form }) {
                     }
                     }
                   /> */}
-          <div className="bg-zinc-100 p-5 my-3 mt-1 rounded-md">
+          
+          {/* card */}
+          <div className="bg-zinc-100 dark:bg-zinc-600 p-5 my-3 mt-1 rounded-md">
             <header className="w-full">
               <div className="flex">
                 <p className="mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">
@@ -194,22 +196,13 @@ export default function Card({ form }) {
                   placeholder="Descripción (Opcional)"
                 />
               </div>
-              <div className="mt-2">
-                <textarea
-                  disabled
-                  id="respuesta"
-                  rows={3}
-                  className="block w-full p-3 h-9 ml-3 rounded-md border-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:py-1.5 sm:text-sm sm:leading-6"
-                  defaultValue={""}
-                  placeholder="Plasma tu respuesta"
-                />
-              </div>
+             
             </div>
           </div>
         </div>
       ))}
       <button
-        className="m-4 bg-gray-700 text-white p-3 cursor-pointer rounded-lg"
+        className="m-4 bg-gray-700 dark:bg-gray-500 text-white p-3 cursor-pointer rounded-lg"
         onClick={() => {
           aggPregunta([
             ...preguntas,

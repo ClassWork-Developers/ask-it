@@ -76,7 +76,7 @@ export default function Nav() {
 
   return (
     <>
-      <Disclosure as='nav' className='bg-white min-h-full sticky top-0 z-[99]'>
+      <Disclosure as='nav' className='bg-white dark:bg-gray-500 min-h-full sticky top-0 z-[99]'>
         {({ open }) => (
           <>
             <div className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>

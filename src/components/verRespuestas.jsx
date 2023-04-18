@@ -48,14 +48,14 @@ function VerRespuestas() {
   };
   return (
     <div className="flex flex-col w-full items-center gap-5">
-      <h1 className="mt-3 text-2xl font-semibold leading-6 text-gray-900 group-hover:text-gray-600">
+      <h1 className="mt-3 text-2xl font-semibold leading-6 text-gray-900 dark:text-gray-300 group-hover:text-gray-600">
         {form[0].nombre}
       </h1>
-      <p>{form[0].descripcion}</p>
+      <p className="dark:text-gray-300">{form[0].descripcion}</p>
       {form[0].preguntas.map((pregunta) => (
         <div
           key={pregunta.id}
-          className="w-full bg-zinc-100 p-5 my-3 mt-1 rounded-md"
+          className="w-full bg-zinc-100 dark:bg-zinc-500 p-5 my-3 mt-1 rounded-md"
         >
           <p className="mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">
             Pregunta: {pregunta.pregunta}
