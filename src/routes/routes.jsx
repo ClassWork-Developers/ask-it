@@ -12,7 +12,7 @@ import UndefinedPath from "../components/UndefinedPath";
 import Register from "../views/Register";
 import Login from "../views/Login";
 import VerForm from "../components/VerForm";
-import VerRespuestas from "../components/verRespuestas";
+import VerRespuestas from "../components/VerRespuestas";
 import { MoonIcon, SunIcon } from "@heroicons/react/20/solid";
 
 export default function Router() {
@@ -48,7 +48,7 @@ export default function Router() {
             {/* Formularios respondidos */}
             <Route path="Respondidos" element={<Respondidos />} />
             {/* Creación y/o edición de un formulario */}
-            <Route path="Edicion" element={<Edicion />} />
+            <Route path="Edicion/:theme" element={<Edicion />} />
             {/* Ver form individual */}
             <Route path="form/:id" element={<VerForm />} />
           </Route>
