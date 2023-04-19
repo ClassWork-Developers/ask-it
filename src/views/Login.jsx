@@ -29,8 +29,9 @@ function Login() {
           id: response.data.id,
           type: 'docente',
         })
-      );
-      window.location.href = '/sesion';
+      ).then(()=>{
+        window.location.href = '/sesion';
+      })
     },
     onError: (error) => {
       Swal.fire({

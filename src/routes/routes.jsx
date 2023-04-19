@@ -14,6 +14,7 @@ import Login from "../views/Login";
 import VerForm from "../components/VerForm";
 import VerRespuestas from "../components/VerRespuestas";
 import { MoonIcon, SunIcon } from "@heroicons/react/20/solid";
+import PrivateRoutes from "./PrivateRoutes";
 
 export default function Router() {
   const [darkToggle, setDarkToggle] = useState(false);
@@ -30,27 +31,27 @@ export default function Router() {
           {/* Sesión iniciada */}
           <Route path="/sesion" element={<NavbarSesion />}>
             {/* Vista para elegir a partir de que plantilla hacer un formulario */}
-            <Route index element={<Creacion />} />
+            <Route index element={<PrivateRoutes><Creacion /></PrivateRoutes>} />
             {/* Formularios hechos */}
             <Route
               path="Formularios"
-              element={<Formularios busqueda={"general"} />}
+              element={<PrivateRoutes><Formularios busqueda={"general"} /></PrivateRoutes>}
             />
             {/* Formularios del Usuario */}
             <Route
               path="Formularios/user"
-              element={<Formularios busqueda={"user"} />}
+              element={<PrivateRoutes><Formularios busqueda={"user"} /></PrivateRoutes>}
             />
             {/* Ver formulario con respuestas */}
-            <Route path="respuestas/:id" element={<VerRespuestas />} />
+            <Route path="respuestas/:id" element={<PrivateRoutes><VerRespuestas /></PrivateRoutes>} />
             {/* Búsqueda de formularios */}
-            <Route path="Buscar" element={<Buscar />} />
+            <Route path="Buscar" element={<PrivateRoutes><Buscar /></PrivateRoutes>} />
             {/* Formularios respondidos */}
-            <Route path="Respondidos" element={<Respondidos />} />
+            <Route path="Respondidos" element={<PrivateRoutes><Respondidos /></PrivateRoutes>} />
             {/* Creación y/o edición de un formulario */}
-            <Route path="Edicion/:theme" element={<Edicion />} />
+            <Route path="Edicion/:theme" element={<PrivateRoutes><Edicion /></PrivateRoutes>} />
             {/* Ver form individual */}
-            <Route path="form/:id" element={<VerForm />} />
+            <Route path="form/:id" element={<PrivateRoutes><VerForm /></PrivateRoutes>} />
           </Route>
           <Route path="*" element={<UndefinedPath />} />
         </Routes>
