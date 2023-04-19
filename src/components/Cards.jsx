@@ -131,6 +131,33 @@ export default function Card({ form }) {
                   />
                 </div>
               </div>
+              <div className="flex items-center gap-5">
+                <p className="mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">
+                  Tipo de Respuesta:
+                </p>
+                <div className="mt-2 grow">
+                  <select
+                    id={pre.id}
+                    value={pre.vof}
+                    className="px-3 h-9 ml-3 rounded-md border-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300"
+                    onChange={(e) => {
+                      aggPregunta(
+                        preguntas.map((pregunta) => {
+                          if (pregunta.id == pre.id) {
+                            return { ...pregunta, vof: e.target.value };
+                          } else {
+                            return pregunta;
+                          }
+                        })
+                      );
+                      form(preguntas);
+                    }}
+                  >
+                    <option value="false">Texto</option>
+                    <option value="true">V/F</option>
+                  </select>
+                </div>
+              </div>
             </header>
             <div className="max-w-lg mx-auto">
               <div className="mt-2">
