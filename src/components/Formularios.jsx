@@ -23,7 +23,7 @@ export default function Formularios({busqueda}) {
   );
   useEffect(() => {
     Formularios();
-  }, [forms]);
+  }, []);
 
   return (
     <>
@@ -34,7 +34,7 @@ export default function Formularios({busqueda}) {
           <div className="mt-6 space-y-12 lg:grid lg:grid-cols-3 lg:gap-6 lg:space-y-0">
             {forms.map((data) => (
               <Link key={data.id} to={busqueda == 'general' ?`/sesion/form/${data.id}`:`/sesion/respuestas/${data.id}`}>
-                <Formulario form={plantillas[1]} name={data.nombre} />
+                <Formulario form={plantillas[data.tema]} name={data.nombre} />
               </Link>
             ))}
           </div>

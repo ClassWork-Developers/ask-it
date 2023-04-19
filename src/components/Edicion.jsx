@@ -76,7 +76,7 @@ export default function Edicion() {
 		}
 	);
 	const handleSubmit = () => {
-		Encuestas({ propietario: user.id, nombre, periodo, descripcion });
+		Encuestas({ propietario: user.id, nombre, periodo, descripcion, tema: theme });
 	};
 	return (
 		<>
