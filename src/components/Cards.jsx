@@ -123,6 +123,7 @@ export default function Card({ form }) {
                       form(preguntas);
                     }
                     }
+                    required
                   />
                 </div>
               </div>
