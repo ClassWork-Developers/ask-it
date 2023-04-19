@@ -49,8 +49,7 @@ export default function Nav() {
     );
   }
 
-  if (localStorage.getItem("currentUser") == null) {
-    const { user } = useAuth0();
+  if (localStorage.getItem("currentUser") == null && user) {
     let obj = {
       correo: user.email,
       nombre: user.name,
@@ -64,7 +63,7 @@ export default function Nav() {
     <>
       <div className="flex">
         <div className="flex flex-col min-h-screen p-3 bg-white shadow w-60 dark:bg-gray-700 dark:text-white dark:border-r-2 dark:border-gray-600">
-          <div className="space-y-3"> 
+          <div className="space-y-3">
             <div className="flex items-center dark:bg-gray-400 dark:p-3 dark:rounded-lg">
               <img
                 src="public/logo.svg"
@@ -72,7 +71,6 @@ export default function Nav() {
                 className="w-8 h-8 mr-2"
               />
               <h2 className="text-xl font-bold">Ask It</h2>
-              
             </div>
 
             <div className="flex-1">
