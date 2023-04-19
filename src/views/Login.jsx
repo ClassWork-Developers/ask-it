@@ -46,9 +46,20 @@ function Login() {
   });
   function Inicio(e) {
     e.preventDefault();
-    InicioA({ correo, clave });
-    setCorreo('');
-    setClave('');
+    if(clave.trim().length>9){
+
+      InicioA({ correo, clave });
+      setCorreo('');
+      setClave('');
+    }else{
+      Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: 'Ingrese una contraseña valida',
+        showConfirmButton: true,
+        timer: 1200,
+      });
+    }
   }
   return (
     <div className='w-full min-h-screen flex items-center justify-center'>
@@ -96,8 +107,8 @@ function Login() {
           </button>
         ) : (
           <div className='w-full flex flex-col items-center gap-2'>
-            <input value={correo} className={classButton} type='email' placeholder='Correo electronico' onChange={(e) => setCorreo(e.target.value)} />
-            <input value={clave} className={classButton} type='password' placeholder='Contraseña' onChange={(e) => setClave(e.target.value)} />
+            <input value={correo} className={classButton} type='email' placeholder='Correo electronico' onChange={(e) => setCorreo(e.target.value)} required />
+            <input value={clave} className={classButton} type='password' placeholder='Contraseña' onChange={(e) => setClave(e.target.value)} required/>
             <button type='submit' className={`${classButton} bg-gray-700 px-5 text-white font-hindi text-lg w-1/5`} >
               Enviar
             </button>

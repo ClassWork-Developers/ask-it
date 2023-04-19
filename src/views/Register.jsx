@@ -57,7 +57,17 @@ function Login() {
     if (selected.rol == 'Estudiante') {
       loginWithRedirect();
     } else {
-      register(nombre, correo, clave, icon, clave_especial);
+      if(nombre.trim().length >=3 && clave.trim().length>=8 && isNaN(nombre)){
+        register(nombre, correo, clave, icon, clave_especial);
+      }else{
+        Swal.fire({
+          position: 'center',
+          icon: 'error',
+          title: 'Recuerde que la contraseña debe tener minimo 8 caracteres sin espacios en blanco y su nombre debe tener minimo 3 letras',
+          showConfirmButton: true,
+          timer:5000,
+        });
+      }
     }
   };
 
