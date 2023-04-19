@@ -6,17 +6,14 @@ const plantillas = [
   {
     name: "Formulario en blanco",
     theme: 'gray',
-    colores: ["bg-slate-600", "bg-slate-50", "bg-slate-900"],
   },
   {
     name: "Paleta Rosa",
-    theme: 'pink',
-    colores: ["bg-rose-600", "bg-rose-50", "bg-rose-900"],
+    theme: 'rose',
   },
   {
     name: "Paleta Azul",
     theme: 'blue',
-    colores: ["bg-blue-600", "bg-blue-50", "bg-blue-900"],
   },
 ];
 const testimoniosData = [

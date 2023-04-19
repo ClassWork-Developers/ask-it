@@ -56,7 +56,7 @@ export default function Creacion() {
 					<div className="mt-6 space-y-12 lg:grid lg:grid-cols-3 lg:gap-x-6 lg:space-y-0">
 						{plantillas.map((plantilla, index) => (
 							<Link to={'/sesion/edicion/:'+plantilla.theme} key={index}>
-								<Formulario form={plantilla} />
+								<Formulario form={plantilla.theme} />
 							</Link>
 						))}
 					</div>
