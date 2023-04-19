@@ -76,7 +76,7 @@ export default function Edicion() {
     }
   );
   const handleSubmit = () => {
-    if (nombre.trim() >= 3) {
+    if (nombre) {
       Encuestas({ propietario: user.id, nombre, periodo, descripcion });
     }
   };
