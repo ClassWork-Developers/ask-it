@@ -45,7 +45,7 @@ export default function Formularios({ busqueda }) {
 								}
 							>
 								<Formulario
-									form={data.tema ? data.tema : plantillas[1]}
+									form={data.tema ? data.tema : plantillas[0].theme}
 									name={data.nombre}
 								/>
 							</Link>
