@@ -1,6 +1,6 @@
 import ComoFunciona from '../components/ComoFunciona';
 import Testimonios from '../components/Testimonios';
-import Footer from '../components/footer';
+import Footer from '../components/Footer';
 import { Link } from 'react-router-dom';
 
 export default function Inicio() {

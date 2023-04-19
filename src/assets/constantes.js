@@ -5,15 +5,15 @@ import Danner from "./3.jpg";
 const plantillas = [
   {
     name: "Formulario en blanco",
-    colores: ["bg-slate-600", "bg-slate-50", "bg-slate-900"],
+    theme: 'gray',
   },
   {
     name: "Paleta Rosa",
-    colores: ["bg-rose-600", "bg-rose-50", "bg-rose-900"],
+    theme: 'rose',
   },
   {
     name: "Paleta Azul",
-    colores: ["bg-blue-600", "bg-blue-50", "bg-blue-900"],
+    theme: 'blue',
   },
 ];
 const testimoniosData = [
